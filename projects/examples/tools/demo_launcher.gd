@@ -2,7 +2,10 @@ extends Node
 
 const DEFAULT_SCENE: String = "res://basics/script_and_node/spinner.tscn"
 const CAMERA_SCRIPT: String = "res://tools/demo_camera.gd"
-const THEME_QUERY: String = "(() => { try { return window.parent.document.documentElement.dataset.theme || 'dark'; } catch (error) { return 'dark'; } })()"
+const THEME_QUERY: String = (
+	"(() => { try { return window.parent.document.documentElement.dataset.theme || 'dark'; }"
+	+ " catch (error) { return 'dark'; } })()"
+)
 
 var light_background: Color = Color("#fdf4e3")
 var dark_colors: Dictionary[String, Color] = {
@@ -22,11 +25,13 @@ var debug_view: bool = false
 func _ready() -> void:
 	var path: String = DEFAULT_SCENE
 	if OS.has_feature("web"):
-		var requested: String = str(JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('scene') || ''"))
+		var requested: String = str(
+			JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('scene') || ''")
+		)
 		if requested != "":
 			path = "res://%s.tscn" % requested
 	if not ResourceLoader.exists(path):
-		push_error("Сцена не найдена: %s" % path)
+		push_error("Scene not found: %s" % path)
 		return
 	var scene: PackedScene = load(path)
 	var demo: Node = scene.instantiate()
@@ -82,8 +87,7 @@ func themed(color: Color) -> Color:
 
 
 func sync_debug() -> void:
-	var result: Variant = JavaScriptBridge.eval("window.godotDebug === true")
-	var wanted: bool = result is bool and result
+	var wanted: bool = JavaScriptBridge.eval("window.godotDebug === true ? 1 : 0") == 1
 	if wanted == debug_view:
 		return
 	debug_view = wanted

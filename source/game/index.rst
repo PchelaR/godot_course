@@ -6,3 +6,5 @@
 
    design
    project
+   maze
+   movement

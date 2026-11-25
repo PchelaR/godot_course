@@ -63,11 +63,11 @@ def test_screenshots_are_numbered_and_used():
         if not images:
             continue
         numbers = sorted(int(p.stem) for p in images if p.stem.isdigit())
-        assert len(numbers) == len(images), f"{folder}: имена скриншотов должны быть номерами"
-        assert numbers == list(range(1, len(numbers) + 1)), f"{folder}: номера должны идти подряд с 1"
+        assert len(numbers) == len(images), f"{folder}: screenshot names must be numbers"
+        assert numbers == list(range(1, len(numbers) + 1)), f"{folder}: numbers must be consecutive starting from 1"
         used = set(re.findall(r"^\s*\.\. screenshot:: (\d+)", rst.read_text(encoding="utf-8"), re.M))
         unused = {str(n) for n in numbers} - used
-        assert not unused, f"{folder}: не используются скриншоты {sorted(unused)}"
+        assert not unused, f"{folder}: unused screenshots {sorted(unused)}"
 
 
 def test_theme_script_has_cache_buster(page):
@@ -95,6 +95,7 @@ def code_files():
         for name in listed
         if (Path(name).suffix in suffixes or Path(name).name == "Makefile")
         and not name.startswith((".idea/", "source/_static/godot/"))
+        and (ROOT / name).is_file()
     ]
 
 

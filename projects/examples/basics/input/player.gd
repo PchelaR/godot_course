@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	var direction: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	position += direction * speed * delta
 	if Input.is_action_just_pressed("ui_accept"):
 		rotation += PI / 2

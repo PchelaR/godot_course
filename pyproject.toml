@@ -1,7 +1,7 @@
 [project]
 name = "godot-course"
 version = "0.1.0"
-description = "Godot: нулевой уровень — документация по Godot на русском языке"
+description = "Russian-language documentation for the Godot engine and GDScript"
 requires-python = ">=3.14"
 dependencies = [
     "sphinx>=8.0",
@@ -16,9 +16,25 @@ dev = [
     "pytest>=8.0",
     "beautifulsoup4>=4.12",
     "pytest-sugar>=1.0",
+    "ruff>=0.8",
+    "gdtoolkit>=4.3",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["tests"]
 addopts = ["--tb=short", "-ra", "--no-header"]
+
+[tool.ruff]
+line-length = 120
+src = ["source/_ext", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["godot_course", "godot_pygments", "conftest"]

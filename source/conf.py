@@ -28,4 +28,3 @@ html_show_sourcelink = False
 html_copy_source = False
 
 pygments_style = "godot_pygments.GodotStyle"
-

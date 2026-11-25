@@ -67,6 +67,8 @@ def test_navigation_contains_chapters(page):
     assert "3. Создание игры" in links
     assert "3.1. Замысел игры" in links
     assert "3.2. Проект и пиксельная графика" in links
+    assert "3.3. Лабиринт" in links
+    assert "3.4. Движение по клеткам" in links
     assert "Глоссарий" in links
 
 
@@ -164,9 +166,7 @@ def test_buttons_share_one_style(site):
 
     css = (site / "_static" / "godot.css").read_text(encoding="utf-8")
     assert "sd-btn" not in css
-    hover_rules = [
-        body for selector, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css) if ":hover" in selector
-    ]
+    hover_rules = [body for selector, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css) if ":hover" in selector]
     assert not any("translate" in body for body in hover_rules)
     demo_button = page_html(site, "basics/script_and_node.html").select_one("button.godot-demo-start")
     assert {"button", "button-primary"} <= set(demo_button["class"])
@@ -287,3 +287,23 @@ def test_fun_fact_blocks(page, name):
     block = page(f"{name}.html").select_one("div.fun-fact")
     assert block is not None
     assert block.select_one("p.fun-fact-label").get_text() == "Интересное"
+
+
+def test_game_demo_uses_project_pack(site, page):
+    demo = page("game/maze.html").select_one("div.godot-demo")
+    assert demo["data-src"].endswith("_static/godot/index.html?pack=maze-03_maze.pck")
+    shell = (site / "_static" / "godot" / "index.html").read_text(encoding="utf-8")
+    assert 'get("pack")' in shell
+    pack = (site / "_static" / "godot" / "maze-03_maze.pck").read_bytes()
+    assert b"global_script_class_cache" in pack, "pack was exported without class_name cache, rerun make demos"
+
+
+def test_theme_stylesheet_loads_last(page):
+    sheets = [link["href"].split("?")[0] for link in page("index.html").select('link[rel="stylesheet"]')]
+    assert sheets[-1].endswith("godot.css"), sheets
+
+
+def test_demo_hint_matches_demo_kind(page):
+    game = page("game/maze.html").select_one("p.godot-demo-hint")
+    assert game.select_one(".godot-demo-mouse") is None
+    assert "камеры" not in game.get_text()

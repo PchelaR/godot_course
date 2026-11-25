@@ -378,10 +378,39 @@ document.addEventListener("DOMContentLoaded", () => {
     tipFor = null;
     tip.hidden = true;
   };
+  const touch = window.matchMedia("(pointer: coarse)");
+  window.addEventListener("scroll", () => {
+    if (touch.matches) {
+      hideTip();
+    }
+  }, { passive: true });
+  document.addEventListener("click", (event) => {
+    if (touch.matches && !event.target.closest('a[href*="#term-"]')) {
+      hideTip();
+    }
+  });
   for (const link of document.querySelectorAll('a.reference.internal[href*="#term-"]')) {
-    link.addEventListener("mouseenter", () => showTip(link));
-    link.addEventListener("focus", () => showTip(link));
-    link.addEventListener("mouseleave", hideTip);
+    link.addEventListener("click", (event) => {
+      if (touch.matches && tipFor !== link) {
+        event.preventDefault();
+        showTip(link);
+      }
+    });
+    link.addEventListener("mouseenter", () => {
+      if (!touch.matches) {
+        showTip(link);
+      }
+    });
+    link.addEventListener("focus", () => {
+      if (!touch.matches) {
+        showTip(link);
+      }
+    });
+    link.addEventListener("mouseleave", () => {
+      if (!touch.matches) {
+        hideTip();
+      }
+    });
     link.addEventListener("blur", hideTip);
   }
 
@@ -492,10 +521,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (heroSection) {
     const mascot = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     mascot.setAttribute("class", "site-mascot");
-    mascot.setAttribute("viewBox", "0 0 16 16");
+    mascot.setAttribute("viewBox", "0 0 32 32");
     mascot.setAttribute("shape-rendering", "crispEdges");
     mascot.setAttribute("aria-hidden", "true");
-    mascot.innerHTML = '<path class="site-mascot-k" d="M3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM9 6h1v1h-1zM10 6h1v1h-1zM11 6h1v1h-1zM12 6h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM12 11h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1z"/><path class="site-mascot-a" d="M5 2h1v1h-1zM6 2h1v1h-1zM7 3h1v1h-1zM7 4h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM2 6h1v1h-1zM13 6h1v1h-1zM2 7h1v1h-1zM13 7h1v1h-1zM1 8h1v1h-1zM2 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM13 9h1v1h-1zM14 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM13 10h1v1h-1zM14 10h1v1h-1zM2 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM13 11h1v1h-1zM2 12h1v1h-1zM13 12h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM6 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM9 13h1v1h-1zM10 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1z"/><path class="site-mascot-e" d="M6 8h1v1h-1zM11 8h1v1h-1zM6 9h1v1h-1zM11 9h1v1h-1z"/>';
+    mascot.innerHTML = '<path class="site-mascot-k" d="M6 12h20v1h-20zM6 13h20v1h-20zM6 14h20v1h-20zM6 15h20v1h-20zM6 16h6v1h-6zM14 16h8v1h-8zM24 16h2v1h-2zM6 17h6v1h-6zM14 17h8v1h-8zM24 17h2v1h-2zM6 18h6v1h-6zM14 18h8v1h-8zM24 18h2v1h-2zM6 19h6v1h-6zM14 19h8v1h-8zM24 19h2v1h-2zM6 20h20v1h-20zM6 21h20v1h-20zM6 22h10v1h-10zM20 22h6v1h-6zM6 23h10v1h-10zM20 23h6v1h-6zM6 24h20v1h-20zM6 25h20v1h-20z"/><path class="site-mascot-a" d="M11 4h4v1h-4zM11 5h4v1h-4zM15 6h2v1h-2zM15 7h2v1h-2zM15 8h2v1h-2zM15 9h2v1h-2zM6 10h20v1h-20zM6 11h20v1h-20zM4 12h2v1h-2zM26 12h2v1h-2zM4 13h2v1h-2zM26 13h2v1h-2zM4 14h2v1h-2zM26 14h2v1h-2zM4 15h2v1h-2zM26 15h2v1h-2zM2 16h4v1h-4zM26 16h4v1h-4zM2 17h4v1h-4zM26 17h4v1h-4zM2 18h4v1h-4zM26 18h4v1h-4zM2 19h4v1h-4zM26 19h4v1h-4zM2 20h4v1h-4zM26 20h4v1h-4zM2 21h4v1h-4zM26 21h4v1h-4zM4 22h2v1h-2zM26 22h2v1h-2zM4 23h2v1h-2zM26 23h2v1h-2zM4 24h2v1h-2zM26 24h2v1h-2zM4 25h2v1h-2zM26 25h2v1h-2zM6 26h20v1h-20zM6 27h20v1h-20zM16 22h4v1h-4zM16 23h4v1h-4z"/><path class="site-mascot-e" d="M12 16h2v1h-2zM22 16h2v1h-2zM12 17h2v1h-2zM22 17h2v1h-2zM12 18h2v1h-2zM22 18h2v1h-2zM12 19h2v1h-2zM22 19h2v1h-2z"/>';
     heroSection.prepend(mascot);
     mascot.addEventListener("click", (event) => {
       if (!calm) {

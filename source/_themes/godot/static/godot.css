@@ -9,6 +9,7 @@
   --accent-2: #b39bd1;
   --line: var(--muted);
   --on-accent: var(--paper);
+  --on-accent-hover: var(--ink);
   --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24' shape-rendering='crispEdges'%3E%3Cpath fill='%23efe2cc' d='M2 4h2v2h-2zM2 6h2v2h-2zM4 6h2v2h-2zM2 8h2v2h-2zM4 8h2v2h-2zM6 8h2v2h-2zM2 10h2v2h-2zM4 10h2v2h-2zM6 10h2v2h-2zM8 10h2v2h-2zM2 12h2v2h-2zM4 12h2v2h-2zM6 12h2v2h-2zM8 12h2v2h-2zM10 12h2v2h-2zM2 14h2v2h-2zM4 14h2v2h-2zM6 14h2v2h-2zM8 14h2v2h-2zM10 14h2v2h-2zM12 14h2v2h-2zM2 16h2v2h-2zM4 16h2v2h-2zM6 16h2v2h-2zM2 18h2v2h-2zM4 18h2v2h-2zM2 20h2v2h-2z'/%3E%3Cpath fill='%231c1814' d='M0 0h2v2h-2zM0 2h2v2h-2zM2 2h2v2h-2zM0 4h2v2h-2zM4 4h2v2h-2zM0 6h2v2h-2zM6 6h2v2h-2zM0 8h2v2h-2zM8 8h2v2h-2zM0 10h2v2h-2zM10 10h2v2h-2zM0 12h2v2h-2zM12 12h2v2h-2zM0 14h2v2h-2zM14 14h2v2h-2zM0 16h2v2h-2zM8 16h2v2h-2zM10 16h2v2h-2zM12 16h2v2h-2zM14 16h2v2h-2zM0 18h2v2h-2zM6 18h2v2h-2zM0 20h2v2h-2zM4 20h2v2h-2zM0 22h2v2h-2zM2 22h2v2h-2z'/%3E%3C/svg%3E") 0 0, auto;
   --grid-opacity: 0.35;
   --intro-floor: var(--paper);
@@ -24,6 +25,7 @@
   --accent-2: #c8a6dc;
   --line: var(--ink);
   --on-accent: var(--ink);
+  --on-accent-hover: var(--window);
   --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24' shape-rendering='crispEdges'%3E%3Cpath fill='%23fdf4e3' d='M2 4h2v2h-2zM2 6h2v2h-2zM4 6h2v2h-2zM2 8h2v2h-2zM4 8h2v2h-2zM6 8h2v2h-2zM2 10h2v2h-2zM4 10h2v2h-2zM6 10h2v2h-2zM8 10h2v2h-2zM2 12h2v2h-2zM4 12h2v2h-2zM6 12h2v2h-2zM8 12h2v2h-2zM10 12h2v2h-2zM2 14h2v2h-2zM4 14h2v2h-2zM6 14h2v2h-2zM8 14h2v2h-2zM10 14h2v2h-2zM12 14h2v2h-2zM2 16h2v2h-2zM4 16h2v2h-2zM6 16h2v2h-2zM2 18h2v2h-2zM4 18h2v2h-2zM2 20h2v2h-2z'/%3E%3Cpath fill='%232b211c' d='M0 0h2v2h-2zM0 2h2v2h-2zM2 2h2v2h-2zM0 4h2v2h-2zM4 4h2v2h-2zM0 6h2v2h-2zM6 6h2v2h-2zM0 8h2v2h-2zM8 8h2v2h-2zM0 10h2v2h-2zM10 10h2v2h-2zM0 12h2v2h-2zM12 12h2v2h-2zM0 14h2v2h-2zM14 14h2v2h-2zM0 16h2v2h-2zM8 16h2v2h-2zM10 16h2v2h-2zM12 16h2v2h-2zM14 16h2v2h-2zM0 18h2v2h-2zM6 18h2v2h-2zM0 20h2v2h-2zM4 20h2v2h-2zM0 22h2v2h-2zM2 22h2v2h-2z'/%3E%3C/svg%3E") 0 0, auto;
   --grid-opacity: 1;
   --intro-floor: var(--ink);
@@ -1292,7 +1294,7 @@ div.sprite-animation {
   }
 }
 
-.sd-container-fluid {
+.sd-container-fluid.sd-container-fluid {
   padding: 0;
 }
 
@@ -1318,10 +1320,11 @@ div.sprite-animation {
   color: var(--on-accent);
   font-family: var(--mono);
   font-weight: 800;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: calc(2 * 1.35em + 16px);
   font-size: 0.95rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.35;
 }
 
 .sd-card-text {
@@ -1433,6 +1436,10 @@ a.project-download:visited {
   text-decoration: none;
 }
 
+a.project-download:hover {
+  color: var(--on-accent-hover);
+}
+
 a.project-download:active {
   box-shadow: none;
   transform: translate(2px, 2px);
@@ -1511,6 +1518,20 @@ p.godot-demo-bar {
   border-left: 10px solid currentColor;
 }
 
+.godot-demo-touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .godot-demo-mouse {
+    display: none;
+  }
+
+  .godot-demo-touch {
+    display: inline;
+  }
+}
+
 p.godot-demo-hint {
   max-width: 420px;
   margin: 0;
@@ -1569,6 +1590,17 @@ dl.glossary dt {
   font-family: var(--mono);
   font-size: 1.02rem;
   font-weight: 800;
+}
+
+dl.glossary dt {
+  scroll-margin-top: 96px;
+}
+
+dt:target {
+  margin-left: -10px;
+  padding: 2px 10px;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 dl.glossary dd {
@@ -2015,7 +2047,7 @@ html.site-crt body::before {
 }
 
 .site-mascot .site-mascot-k {
-  fill: var(--line);
+  fill: var(--window);
 }
 
 .site-mascot .site-mascot-a {
@@ -2046,6 +2078,20 @@ html.site-crt body::before {
 
 .site[data-page="index"] div.hero {
   position: relative;
+}
+
+.site[data-page="index"] div.hero:has(.site-mascot) {
+  padding-right: 152px;
+}
+
+@media (max-width: 1100px) {
+  .site[data-page="index"] div.hero:has(.site-mascot) {
+    padding-right: 0;
+  }
+
+  .site-mascot {
+    display: none;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -2088,20 +2134,20 @@ html.site-crt body::before {
 }
 
 @media (max-width: 900px) {
-  .site-mascot {
-    display: none;
-  }
-
   .site {
     display: block;
   }
 
   .site-sidebar {
-    position: static;
+    z-index: 200;
     height: auto;
-    padding: 16px 20px;
+    max-height: 100dvh;
+    padding: 12px 16px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     border-right: none;
     border-bottom: var(--border);
+    scrollbar-gutter: auto;
   }
 
   .site-sidebar-head {
@@ -2122,7 +2168,28 @@ html.site-crt body::before {
   }
 
   .site-main {
-    padding: 36px 20px;
+    padding: 28px 16px 48px;
+  }
+
+  div.highlight pre,
+  pre.literal-block {
+    padding: 12px 14px;
+    font-size: 0.8rem;
+  }
+
+  .site-top {
+    right: 12px;
+    bottom: 12px;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
+
+  .site-achievement {
+    top: auto;
+    right: 12px;
+    bottom: 56px;
+    left: 12px;
+    width: auto;
   }
 
   h1 {

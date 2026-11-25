@@ -1,3 +1,4 @@
+import sys
 import zipfile
 from pathlib import Path
 
@@ -6,8 +7,6 @@ from bs4 import BeautifulSoup
 from sphinx.cmd.build import build_main
 
 from conftest import SOURCE
-
-import sys
 
 sys.path.insert(0, str(SOURCE / "_ext"))
 
@@ -297,7 +296,6 @@ def test_screenshot_invalid_or_missing_fails_strict_build(tmp_path, name):
     assert code != 0
 
 
-
 def test_example_directive(tmp_path):
     src = tmp_path / "src"
     example = src / "projects" / "examples" / "demo"
@@ -331,14 +329,11 @@ def test_missing_example_fails_strict_build(tmp_path):
     assert build(src, tmp_path / "out") != 0
 
 
-
 def test_in_game_directive(tmp_path):
     src = tmp_path / "src"
     src.mkdir()
     (src / "conf.py").write_text(CONF.format(ext=str(SOURCE / "_ext")), encoding="utf-8")
-    (src / "index.rst").write_text(
-        "Тест\n====\n\n.. in-game::\n\n   Представьте **персонажа**.\n", encoding="utf-8"
-    )
+    (src / "index.rst").write_text("Тест\n====\n\n.. in-game::\n\n   Представьте **персонажа**.\n", encoding="utf-8")
     out = tmp_path / "out"
     assert build(src, out) == 0
     block = soup(out / "index.html").select_one("div.in-game")
@@ -387,12 +382,15 @@ def test_resolve_docname(current, target, expected):
     assert resolve_docname(current, target) == expected
 
 
-@pytest.mark.parametrize("code", [
-    "@onready var lamps: Node2D = $Lamps\n",
-    "var light: Polygon2D = $Lamps/Lamp1/Light\n",
-    'var lamp: Node = $"Lamps/Lamp 2"\n',
-    "@export var speed: float = 1.0\n",
-])
+@pytest.mark.parametrize(
+    "code",
+    [
+        "@onready var lamps: Node2D = $Lamps\n",
+        "var light: Polygon2D = $Lamps/Lamp1/Light\n",
+        'var lamp: Node = $"Lamps/Lamp 2"\n',
+        "@export var speed: float = 1.0\n",
+    ],
+)
 def test_gdscript_lexer_has_no_errors(code):
     import sys
 

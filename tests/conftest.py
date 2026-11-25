@@ -19,7 +19,7 @@ PALETTE = THEMES["dark"] | THEMES["light"]
 def site(tmp_path_factory) -> Path:
     out = tmp_path_factory.mktemp("html")
     code = build_main(["-b", "html", "-E", "-W", "--keep-going", "-n", "-q", str(SOURCE), str(out)])
-    assert code == 0, "сборка завершилась с ошибками или предупреждениями"
+    assert code == 0, "the build finished with errors or warnings"
     return out
 
 
