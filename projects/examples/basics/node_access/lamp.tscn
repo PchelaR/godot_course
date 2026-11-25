@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[node name="Lamp" type="Node2D"]
+
+[node name="Glass" type="Polygon2D" parent="."]
+color = Color(0.9922, 0.9569, 0.8902, 1)
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="Light" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+
+[node name="Outline" type="Line2D" parent="."]
+points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+closed = true
+width = 4.0
+default_color = Color(0.1686, 0.1294, 0.1098, 1)

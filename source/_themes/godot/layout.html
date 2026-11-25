@@ -1,0 +1,63 @@
+{%- extends "basic/layout.html" %}
+
+{%- block extrahead %}
+<script>try{const t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;if(localStorage.getItem("crt")==="on")document.documentElement.classList.add("site-crt")}catch(e){}</script>
+<link rel="apple-touch-icon" href="{{ pathto('_static/favicon_180x180.png', 1) }}">
+{{ super() }}
+{%- endblock %}
+
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+{%- block footer %}{% endblock %}
+
+{%- block content %}
+<div class="site" data-page="{{ pagename }}">
+  <input type="checkbox" id="nav-toggle" class="site-nav-toggle">
+  <aside class="site-sidebar">
+    <div class="site-sidebar-head">
+      <a class="site-brand" href="{{ pathto(root_doc) }}"><img class="site-brand-logo" src="{{ pathto('_static/logo_32x32.svg', 1) }}" alt="" width="32" height="32">
+        {%- set brand = docstitle.split(': ', 1) %}
+        <span class="site-brand-text">
+          {%- if brand|length == 2 %}<span class="site-brand-kicker">{{ brand[0]|e }}:</span> <span class="site-brand-name">{{ brand[1]|e }}</span>
+          {%- else %}<span class="site-brand-name">{{ docstitle|e }}</span>{%- endif %}
+        </span></a>
+      <div class="site-sidebar-actions">
+        <button type="button" class="site-theme-toggle" aria-label="Сменить тему" title="Сменить тему"></button>
+        <label for="nav-toggle" class="site-menu-button">Меню</label>
+      </div>
+    </div>
+    <div class="site-sidebar-body">
+      <form class="site-search" action="{{ pathto('search') }}" method="get">
+        <input type="search" name="q" placeholder="Поиск" aria-label="Поиск">
+        <kbd class="site-search-key">/</kbd>
+      </form>
+      <nav class="site-nav">
+        {{ toctree(collapse=False, maxdepth=2, titles_only=True, includehidden=True) }}
+      </nav>
+    </div>
+  </aside>
+  <script>try{const s=document.querySelector(".site-sidebar"),n=s.querySelector(".site-nav"),o=n&&n.querySelector("li.toctree-l1.current");if(n)n.classList.add("site-nav-ready");if(o)o.classList.add("site-nav-open");const v=sessionStorage.getItem("sidebar-scroll");if(v!==null){s.scrollTop=Number(v)}else{const c=s.querySelector(".site-nav a.current");if(c){s.scrollTop=c.offsetTop-s.clientHeight/3}}}catch(e){}</script>
+  <main class="site-main">
+    <div class="body" role="main">
+      {% block body %}{% endblock %}
+    </div>
+    {%- if prev or next %}
+    <nav class="site-pager">
+      {%- if prev %}
+      <a class="site-pager-prev" href="{{ prev.link|e }}" title="Клавиша ←"><span>Назад</span>{{ prev.title }}</a>
+      {%- else %}<span></span>{%- endif %}
+      {%- if next %}
+      <a class="site-pager-next" href="{{ next.link|e }}" title="Клавиша →"><span>Далее</span>{{ next.title }}</a>
+      {%- endif %}
+    </nav>
+    {%- endif %}
+    <footer class="site-footer">&copy; {{ copyright }}<p class="site-hiscore"></p></footer>
+  </main>
+  <aside class="site-toc">
+    {%- if display_toc %}
+    <p class="site-toc-title">На этой странице</p>
+    {{ toc }}
+    {%- endif %}
+  </aside>
+</div>
+{%- endblock %}

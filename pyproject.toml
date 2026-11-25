@@ -1,0 +1,24 @@
+[project]
+name = "godot-course"
+version = "0.1.0"
+description = "Godot: нулевой уровень — документация по Godot на русском языке"
+requires-python = ">=3.14"
+dependencies = [
+    "sphinx>=8.0",
+    "sphinx-design>=0.6.0",
+    "pillow>=11.0",
+]
+
+[dependency-groups]
+dev = [
+    "sphinx-autobuild>=2024.10.3",
+    "sphinx-lint>=1.0.0",
+    "pytest>=8.0",
+    "beautifulsoup4>=4.12",
+    "pytest-sugar>=1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
+addopts = ["--tb=short", "-ra", "--no-header"]

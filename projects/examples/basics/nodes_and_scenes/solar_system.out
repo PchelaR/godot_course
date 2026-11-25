@@ -1,0 +1,11 @@
+ ┖╴SolarSystem
+    ┠╴Earth
+    ┃  ┠╴Orbit
+    ┃  ┖╴Body
+    ┃     ┖╴Outline
+    ┠╴Mars
+    ┃  ┠╴Orbit
+    ┃  ┖╴Body
+    ┃     ┖╴Outline
+    ┖╴Sun
+       ┖╴Outline

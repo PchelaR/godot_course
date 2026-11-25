@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://basics/export/spinner.gd" id="1"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2"]
+
+[node name="Spinners" type="Node2D"]
+
+[node name="Slow" type="Sprite2D" parent="."]
+position = Vector2(376, 324)
+texture = ExtResource("2")
+script = ExtResource("1")
+turn_speed = 1.0
+
+[node name="Fast" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("2")
+script = ExtResource("1")
+turn_speed = 5.0
+
+[node name="Reverse" type="Sprite2D" parent="."]
+position = Vector2(776, 324)
+texture = ExtResource("2")
+script = ExtResource("1")
+turn_speed = -2.0

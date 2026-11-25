@@ -1,0 +1,8 @@
+Level: _enter_tree
+Player: _enter_tree
+Sword: _enter_tree
+Enemy: _enter_tree
+Sword: _ready
+Player: _ready
+Enemy: _ready
+Level: _ready

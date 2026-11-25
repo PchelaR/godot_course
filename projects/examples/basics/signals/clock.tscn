@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://basics/signals/clock.gd" id="1"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2"]
+
+[node name="Clock" type="Sprite2D"]
+texture = ExtResource("2")
+script = ExtResource("1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true

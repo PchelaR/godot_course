@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://basics/export/turret.gd" id="1"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Turret" type="Node2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(100, 100)
+script = ExtResource("1")
+target = NodePath("../Player")
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(400, 500)

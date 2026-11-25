@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://basics/vectors/patrol.gd" id="1"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2"]
+
+[node name="Patrol" type="Node2D"]
+
+[node name="Route" type="Line2D" parent="."]
+points = PackedVector2Array(376, 204, 776, 204, 776, 444, 376, 444)
+closed = true
+width = 4.0
+default_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[node name="Guard" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2")
+script = ExtResource("1")

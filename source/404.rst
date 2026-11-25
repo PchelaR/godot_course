@@ -1,0 +1,12 @@
+:orphan:
+
+GAME OVER
+=========
+
+.. rst-class:: game-over-lead
+
+Страница не найдена: её переименовали, перенесли или её никогда не было.
+
+.. link-button:: index
+
+   Continue?
