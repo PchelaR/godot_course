@@ -9,3 +9,4 @@
 
    movement/index
    enemies/index
+   camera/index

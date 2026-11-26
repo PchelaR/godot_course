@@ -565,3 +565,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+if ("serviceWorker" in navigator && window.location.protocol === "https:") {
+  const manifest = document.querySelector('link[rel="manifest"]');
+  if (manifest) {
+    navigator.serviceWorker.register(new URL("sw.js", manifest.href)).catch(() => {});
+  }
+}

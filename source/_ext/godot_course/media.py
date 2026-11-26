@@ -167,6 +167,17 @@ def pack_name(project: str) -> str:
     return project.strip("/").replace("/", "-") + ".pck"
 
 
+def viewport_ratio(project: Path) -> str | None:
+    size = {}
+    for line in project.read_text(encoding="utf-8").splitlines():
+        key, _, value = line.partition("=")
+        if key in ("window/size/viewport_width", "window/size/viewport_height"):
+            size[key.rsplit("_", 1)[1]] = value.strip()
+    if "width" in size and "height" in size:
+        return f"{size['width']} / {size['height']}"
+    return None
+
+
 class GodotDemoDirective(SphinxDirective):
     required_arguments = 1
     option_spec = {
@@ -181,9 +192,11 @@ class GodotDemoDirective(SphinxDirective):
         project = root / name / "project.godot"
         scene = root / "examples" / f"{name}.tscn"
         node = godot_demo()
+        ratio = "16 / 9"
         if project.is_file():
             node["query"] = f"pack={pack_name(name)}"
             self.env.note_dependency(str(project))
+            ratio = viewport_ratio(project) or ratio
         elif scene.is_file():
             node["query"] = f"scene={name}"
             self.env.note_dependency(str(scene))
@@ -193,7 +206,7 @@ class GodotDemoDirective(SphinxDirective):
         build = Path(self.env.srcdir) / DEMO_BUILD
         if not build.is_file():
             logger.warning("web build of the examples not found, run make demos", location=self.get_location())
-        node["ratio"] = self.options.get("ratio", "16 / 9")
+        node["ratio"] = self.options.get("ratio", ratio)
         node["title"] = self.options.get("title", "Пример в Godot")
         node["debug"] = "debug" in self.options
         return [node]

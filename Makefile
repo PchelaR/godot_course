@@ -1,5 +1,9 @@
 SOURCE = source
 BUILD = build/html
+DOCTREES = build/doctrees
+DIST = build/dist
+DEPLOY_HOST ?=
+DEPLOY_PATH ?= /var/www/godot-course
 PORT ?= 8000
 export GODOT_BIN
 GODOT ?= $(or $(GODOT_BIN),/Applications/Godot.app/Contents/MacOS/Godot)
@@ -13,15 +17,15 @@ else
 TEMPLATES_DIR = $(HOME)/.local/share/godot/export_templates/$(GODOT_VERSION)
 endif
 GD_FILES = $(shell find projects -name '*.gd' -not -path '*/.godot/*')
-PY_PATHS = source/_ext source/conf.py tests
+PY_PATHS = source/_ext source/conf.py tests deploy
 GAME_PROJECTS = $(patsubst %/project.godot,%,$(wildcard projects/maze/*/project.godot))
 DEMO_SOURCES = $(shell find $(EXAMPLES) -type f -not -path '*/.godot/*' -not -name '*.out')
 TEMPLATES_URL = https://github.com/godotengine/godot-builds/releases/download/$(GODOT_RELEASE)/Godot_v$(GODOT_RELEASE)_export_templates.tpz
 
-.PHONY: html lint format linkcheck test run demos packs templates
+.PHONY: html lint format linkcheck test run demos packs templates dist deploy
 
 html:
-	uv run sphinx-build -b html $(SOURCE) $(BUILD)
+	uv run sphinx-build -b html -d $(DOCTREES) $(SOURCE) $(BUILD)
 
 lint:
 	uv run sphinx-lint $(SOURCE)
@@ -41,8 +45,17 @@ linkcheck:
 test: lint demos
 	uv run pytest
 
+dist: demos
+	rm -rf $(DIST)
+	uv run sphinx-build -b html -E -W --keep-going -d $(DOCTREES) $(SOURCE) $(DIST)
+
+deploy: dist
+	@test -n "$(DEPLOY_HOST)" || { echo "Set DEPLOY_HOST, for example: make deploy DEPLOY_HOST=user@server"; exit 1; }
+	uv run python deploy/compress.py $(DIST)
+	rsync -az --delete --exclude .buildinfo $(DIST)/ $(DEPLOY_HOST):$(DEPLOY_PATH)/
+
 run: demos
-	@uv run sphinx-autobuild $(SOURCE) $(BUILD) --port $(PORT) -q
+	@uv run sphinx-autobuild $(SOURCE) $(BUILD) -d $(DOCTREES) --port $(PORT) -q
 
 demos: $(DEMOS)/index.html packs
 

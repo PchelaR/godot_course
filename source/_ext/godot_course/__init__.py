@@ -39,6 +39,7 @@ from .media import (
     visit_sprite_animation_html,
 )
 from .projects import archive_name, pack_projects, resolve_projects_dir
+from .pwa import write_offline_files
 from .roles import GodotRole, GodotSignalRole, ProjectRole, godot_docs_url
 
 __all__ = ["archive_name", "diff_lines", "godot_docs_url", "optimize_image", "resolve_docname", "setup"]
@@ -132,5 +133,6 @@ def setup(app: Sphinx) -> dict:
     app.connect("builder-inited", add_theme_script)
     app.connect("config-inited", resolve_projects_dir)
     app.connect("build-finished", pack_projects)
+    app.connect("build-finished", write_offline_files)
     app.connect("env-get-outdated", refresh_all_pages)
     return {"version": "1.0", "parallel_read_safe": True, "parallel_write_safe": True}

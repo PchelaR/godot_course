@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://recipes/camera/world.tscn" id="world"]
+[ext_resource type="Script" path="res://recipes/movement/eight_way.gd" id="player"]
+
+[sub_resource type="RectangleShape2D" id="Shape_player"]
+size = Vector2(32, 32)
+
+[node name="Recipe" type="Node2D"]
+
+[node name="World" parent="." instance=ExtResource("world")]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(576, 324)
+motion_mode = 1
+script = ExtResource("player")
+
+[node name="Shape" type="CollisionShape2D" parent="Player"]
+shape = SubResource("Shape_player")
+
+[node name="Look" type="Polygon2D" parent="Player"]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[node name="Camera" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = 0
+limit_right = 3456
+limit_bottom = 1944
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0

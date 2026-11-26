@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -28,3 +29,4 @@ html_show_sourcelink = False
 html_copy_source = False
 
 pygments_style = "godot_pygments.GodotStyle"
+html_context = {"site_root": os.environ.get("SITE_ROOT", "/")}

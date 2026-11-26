@@ -1,5 +1,5 @@
-3. Создание игры
-================
+3. Разработка игры
+==================
 
 .. toctree::
    :maxdepth: 1
@@ -11,3 +11,5 @@
    turning
    tunnel
    animation
+   coins
+   score

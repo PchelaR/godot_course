@@ -6,7 +6,7 @@
 [node name="Level" type="Node2D"]
 
 [node name="Maze" parent="." instance=ExtResource("1")]
-position = Vector2(40, 15)
+position = Vector2(0, 16)
 
 [node name="DebugGrid" type="Node2D" parent="Maze"]
 z_index = 1

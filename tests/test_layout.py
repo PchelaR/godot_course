@@ -64,7 +64,7 @@ def test_navigation_contains_chapters(page):
     assert "2.7. Экспорт переменных" in links
     assert "2.8. Сигналы" in links
     assert "2.9. Экземпляры сцен из кода" in links
-    assert "3. Создание игры" in links
+    assert "3. Разработка игры" in links
     assert "3.1. Замысел игры" in links
     assert "3.2. Проект и пиксельная графика" in links
     assert "3.3. Лабиринт" in links
@@ -72,10 +72,13 @@ def test_navigation_contains_chapters(page):
     assert "3.5. Поворот заранее" in links
     assert "3.6. Туннель" in links
     assert "3.7. Анимация героя" in links
+    assert "3.8. Монеты" in links
+    assert "3.9. Счёт" in links
     assert "4. Рецепты" in links
     assert "4.1. Движение" in links
     assert "4.1.3. Платформер" in links
     assert "4.2. Враги" in links
+    assert "4.3. Камера" in links
     assert "Восемь направлений" in links
     assert "Глоссарий" in links
 
@@ -315,3 +318,8 @@ def test_demo_hint_matches_demo_kind(page):
     game = page("game/maze.html").select_one("p.godot-demo-hint")
     assert game.select_one(".godot-demo-mouse") is None
     assert "камеры" not in game.get_text()
+
+
+def test_game_demo_matches_game_screen(page):
+    screen = page("game/score.html").select_one("div.godot-demo-screen")
+    assert "aspect-ratio: 400 / 256" in screen["style"]
