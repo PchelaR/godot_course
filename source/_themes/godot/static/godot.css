@@ -369,6 +369,22 @@ figure.screenshot,
   display: block;
 }
 
+.site-nav li.toctree-l2 > ul {
+  display: none;
+}
+
+.site-nav li.toctree-l2.current > ul {
+  display: block;
+}
+
+.site-nav li.toctree-l3 > ul {
+  display: none;
+}
+
+.site-nav li.toctree-l3.current > ul {
+  display: block;
+}
+
 .site-nav li.toctree-l1:has(> ul) > a {
   padding-right: 40px;
 }

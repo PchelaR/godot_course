@@ -69,6 +69,14 @@ def test_navigation_contains_chapters(page):
     assert "3.2. Проект и пиксельная графика" in links
     assert "3.3. Лабиринт" in links
     assert "3.4. Движение по клеткам" in links
+    assert "3.5. Поворот заранее" in links
+    assert "3.6. Туннель" in links
+    assert "3.7. Анимация героя" in links
+    assert "4. Рецепты" in links
+    assert "4.1. Движение" in links
+    assert "4.1.3. Платформер" in links
+    assert "4.2. Враги" in links
+    assert "Восемь направлений" in links
     assert "Глоссарий" in links
 
 

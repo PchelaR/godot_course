@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://recipes/movement/arena.tscn" id="arena"]
+[ext_resource type="Script" path="res://recipes/movement/eight_way.gd" id="player"]
+[ext_resource type="Script" path="res://recipes/enemies/sight.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="Shape_player"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="Shape_enemy"]
+radius = 18.0
+
+[node name="Recipe" type="Node2D"]
+
+[node name="Arena" parent="." instance=ExtResource("arena")]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(140, 540)
+motion_mode = 1
+script = ExtResource("player")
+
+[node name="Shape" type="CollisionShape2D" parent="Player"]
+shape = SubResource("Shape_player")
+
+[node name="Look" type="Polygon2D" parent="Player"]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[node name="Guard" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(700, 160)
+rotation = 1.5708
+motion_mode = 1
+script = ExtResource("1")
+player = NodePath("../Player")
+
+[node name="Shape" type="CollisionShape2D" parent="Guard"]
+shape = SubResource("Shape_enemy")
+
+[node name="Look" type="Polygon2D" parent="Guard"]
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(-20, -20, 24, 0, -20, 20, -12, 0)
+
+[node name="Eye" type="RayCast2D" parent="Guard"]
+target_position = Vector2(0, 0)

@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3]
+
+[sub_resource type="RectangleShape2D" id="Shape_Floor"]
+size = Vector2(1152, 48)
+
+[sub_resource type="RectangleShape2D" id="Shape_Left"]
+size = Vector2(24, 600)
+
+[sub_resource type="RectangleShape2D" id="Shape_Right"]
+size = Vector2(24, 600)
+
+[sub_resource type="RectangleShape2D" id="Shape_Low"]
+size = Vector2(200, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_Middle"]
+size = Vector2(200, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_High"]
+size = Vector2(200, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_Top"]
+size = Vector2(160, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_Ledge"]
+size = Vector2(180, 24)
+
+[node name="PlatformArena" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="Floor" type="CollisionShape2D" parent="Ground"]
+position = Vector2(576, 624)
+shape = SubResource("Shape_Floor")
+
+[node name="FloorLook" type="Polygon2D" parent="Ground"]
+position = Vector2(576, 624)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-576, -24, 576, -24, 576, 24, -576, 24)
+
+[node name="Left" type="CollisionShape2D" parent="Ground"]
+position = Vector2(12, 300)
+shape = SubResource("Shape_Left")
+
+[node name="LeftLook" type="Polygon2D" parent="Ground"]
+position = Vector2(12, 300)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-12, -300, 12, -300, 12, 300, -12, 300)
+
+[node name="Right" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1140, 300)
+shape = SubResource("Shape_Right")
+
+[node name="RightLook" type="Polygon2D" parent="Ground"]
+position = Vector2(1140, 300)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-12, -300, 12, -300, 12, 300, -12, 300)
+
+[node name="Low" type="CollisionShape2D" parent="Ground"]
+position = Vector2(300, 500)
+shape = SubResource("Shape_Low")
+
+[node name="LowLook" type="Polygon2D" parent="Ground"]
+position = Vector2(300, 500)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-100, -12, 100, -12, 100, 12, -100, 12)
+
+[node name="Middle" type="CollisionShape2D" parent="Ground"]
+position = Vector2(560, 400)
+shape = SubResource("Shape_Middle")
+
+[node name="MiddleLook" type="Polygon2D" parent="Ground"]
+position = Vector2(560, 400)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-100, -12, 100, -12, 100, 12, -100, 12)
+
+[node name="High" type="CollisionShape2D" parent="Ground"]
+position = Vector2(820, 300)
+shape = SubResource("Shape_High")
+
+[node name="HighLook" type="Polygon2D" parent="Ground"]
+position = Vector2(820, 300)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-100, -12, 100, -12, 100, 12, -100, 12)
+
+[node name="Top" type="CollisionShape2D" parent="Ground"]
+position = Vector2(620, 200)
+shape = SubResource("Shape_Top")
+
+[node name="TopLook" type="Polygon2D" parent="Ground"]
+position = Vector2(620, 200)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-80, -12, 80, -12, 80, 12, -80, 12)
+
+[node name="Ledge" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1040, 420)
+shape = SubResource("Shape_Ledge")
+
+[node name="LedgeLook" type="Polygon2D" parent="Ground"]
+position = Vector2(1040, 420)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)

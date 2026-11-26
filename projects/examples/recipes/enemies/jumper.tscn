@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://recipes/movement/platform_arena.tscn" id="arena"]
+[ext_resource type="Script" path="res://recipes/movement/platformer.gd" id="player"]
+[ext_resource type="Script" path="res://recipes/enemies/jumper.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="Shape_player"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="Shape_jumper"]
+size = Vector2(36, 28)
+
+[node name="Recipe" type="Node2D"]
+
+[node name="PlatformArena" parent="." instance=ExtResource("arena")]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(120, 560)
+script = ExtResource("player")
+
+[node name="Shape" type="CollisionShape2D" parent="Player"]
+shape = SubResource("Shape_player")
+
+[node name="Look" type="Polygon2D" parent="Player"]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-16, -24, 16, -24, 16, 24, -16, 24)
+
+[node name="Jumper" type="CharacterBody2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(560, 580)
+collision_layer = 2
+script = ExtResource("1")
+target = NodePath("../Player")
+
+[node name="Shape" type="CollisionShape2D" parent="Jumper"]
+shape = SubResource("Shape_jumper")
+
+[node name="Look" type="Polygon2D" parent="Jumper"]
+position = Vector2(0, 14)
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(-18, 0, -18, -16, -10, -28, 10, -28, 18, -16, 18, 0)

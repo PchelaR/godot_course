@@ -8,8 +8,6 @@ extends Node2D
 var cell: Vector2i
 var direction: Vector2i = Vector2i.ZERO
 
-@onready var sprite: Sprite2D = $Sprite2D
-
 
 func _ready() -> void:
 	cell = start_cell
@@ -42,8 +40,6 @@ func choose_direction() -> void:
 		direction = wanted
 	elif maze.is_wall(cell + direction):
 		direction = Vector2i.ZERO
-	if direction.x != 0:
-		sprite.flip_h = direction.x < 0
 
 
 func read_input() -> Vector2i:

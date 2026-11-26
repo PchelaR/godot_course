@@ -1,0 +1,4 @@
+down false (12, 9)
+right true (12, 9)
+left true (13, 9)
+left false (7, 9)

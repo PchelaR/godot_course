@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://recipes/movement/arena.tscn" id="arena"]
+[ext_resource type="Script" path="res://recipes/movement/eight_way.gd" id="player"]
+[ext_resource type="Script" path="res://recipes/enemies/patrol.gd" id="1"]
+
+[sub_resource type="Curve2D" id="Curve_loop"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 200, 140, 0, 0, 0, 0, 470, 140, 0, 0, 0, 0, 470, 320, 0, 0, 0, 0, 200, 320, 0, 0, 0, 0, 200, 140)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve_line"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 640, 560, 0, 0, 0, 0, 1060, 560)
+}
+point_count = 2
+
+[node name="Recipe" type="Node2D"]
+
+[node name="Arena" parent="." instance=ExtResource("arena")]
+
+[node name="LoopRoute" type="Path2D" parent="."]
+curve = SubResource("Curve_loop")
+
+[node name="Trail" type="Line2D" parent="LoopRoute"]
+points = PackedVector2Array(200, 140, 470, 140, 470, 320, 200, 320, 200, 140)
+width = 2.0
+default_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[node name="Guard" type="PathFollow2D" parent="LoopRoute"]
+script = ExtResource("1")
+
+[node name="Look" type="Polygon2D" parent="LoopRoute/Guard"]
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(-20, -20, 24, 0, -20, 20, -12, 0)
+
+[node name="LineRoute" type="Path2D" parent="."]
+curve = SubResource("Curve_line")
+
+[node name="Trail" type="Line2D" parent="LineRoute"]
+points = PackedVector2Array(640, 560, 1060, 560)
+width = 2.0
+default_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[node name="Guard" type="PathFollow2D" parent="LineRoute"]
+script = ExtResource("1")
+ping_pong = true
+
+[node name="Look" type="Polygon2D" parent="LineRoute/Guard"]
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(-20, -20, 24, 0, -20, 20, -12, 0)

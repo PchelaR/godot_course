@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://recipes/movement/ladder.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="Shape_Floor"]
+size = Vector2(1152, 48)
+
+[sub_resource type="RectangleShape2D" id="Shape_Left"]
+size = Vector2(24, 600)
+
+[sub_resource type="RectangleShape2D" id="Shape_Right"]
+size = Vector2(24, 600)
+
+[sub_resource type="RectangleShape2D" id="Shape_PlatformA"]
+size = Vector2(500, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_PlatformB"]
+size = Vector2(400, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_LadderA"]
+size = Vector2(32, 164)
+
+[sub_resource type="RectangleShape2D" id="Shape_LadderB"]
+size = Vector2(32, 176)
+
+[sub_resource type="RectangleShape2D" id="Shape_player"]
+size = Vector2(32, 48)
+
+[node name="Recipe" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Ladders" type="Node2D" parent="."]
+
+[node name="LadderA" type="Area2D" parent="Ladders"]
+position = Vector2(360, 518)
+
+[node name="Shape" type="CollisionShape2D" parent="Ladders/LadderA"]
+shape = SubResource("Shape_LadderA")
+
+[node name="Look" type="Polygon2D" parent="Ladders/LadderA"]
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(-16, -82, 16, -82, 16, 82, -16, 82)
+
+[node name="LadderB" type="Area2D" parent="Ladders"]
+position = Vector2(640, 364)
+
+[node name="Shape" type="CollisionShape2D" parent="Ladders/LadderB"]
+shape = SubResource("Shape_LadderB")
+
+[node name="Look" type="Polygon2D" parent="Ladders/LadderB"]
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(-16, -88, 16, -88, 16, 88, -16, 88)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="Floor" type="CollisionShape2D" parent="Ground"]
+position = Vector2(576, 624)
+shape = SubResource("Shape_Floor")
+
+[node name="FloorLook" type="Polygon2D" parent="Ground"]
+position = Vector2(576, 624)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-576, -24, 576, -24, 576, 24, -576, 24)
+
+[node name="Left" type="CollisionShape2D" parent="Ground"]
+position = Vector2(12, 300)
+shape = SubResource("Shape_Left")
+
+[node name="LeftLook" type="Polygon2D" parent="Ground"]
+position = Vector2(12, 300)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-12, -300, 12, -300, 12, 300, -12, 300)
+
+[node name="Right" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1140, 300)
+shape = SubResource("Shape_Right")
+
+[node name="RightLook" type="Polygon2D" parent="Ground"]
+position = Vector2(1140, 300)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-12, -300, 12, -300, 12, 300, -12, 300)
+
+[node name="Platforms" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="PlatformA" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(450, 460)
+shape = SubResource("Shape_PlatformA")
+one_way_collision = true
+
+[node name="PlatformALook" type="Polygon2D" parent="Platforms"]
+position = Vector2(450, 460)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-250, -8, 250, -8, 250, 8, -250, 8)
+
+[node name="PlatformB" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(760, 300)
+shape = SubResource("Shape_PlatformB")
+one_way_collision = true
+
+[node name="PlatformBLook" type="Polygon2D" parent="Platforms"]
+position = Vector2(760, 300)
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-200, -8, 200, -8, 200, 8, -200, 8)
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("ladders")]
+position = Vector2(120, 560)
+collision_mask = 3
+script = ExtResource("1")
+ladders = [NodePath("../Ladders/LadderA"), NodePath("../Ladders/LadderB")]
+
+[node name="Shape" type="CollisionShape2D" parent="Player"]
+shape = SubResource("Shape_player")
+
+[node name="Look" type="Polygon2D" parent="Player"]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-16, -24, 16, -24, 16, 24, -16, 24)
