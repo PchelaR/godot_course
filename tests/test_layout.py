@@ -14,6 +14,7 @@ PAGES = [
     "basics/script_and_node.html",
     "basics/nodes_and_scenes.html",
     "appendix/glossary.html",
+    "appendix/trophies.html",
     "search.html",
 ]
 
@@ -74,6 +75,10 @@ def test_navigation_contains_chapters(page):
     assert "3.7. Анимация героя" in links
     assert "3.8. Монеты" in links
     assert "3.9. Счёт" in links
+    assert "3.10. Первый слайм" in links
+    assert "3.11. Режимы слайма" in links
+    assert "3.12. Характеры слаймов" in links
+    assert "3.13. Дом слаймов" in links
     assert "4. Рецепты" in links
     assert "4.1. Движение" in links
     assert "4.1.3. Платформер" in links
@@ -81,6 +86,7 @@ def test_navigation_contains_chapters(page):
     assert "4.3. Камера" in links
     assert "Восемь направлений" in links
     assert "Глоссарий" in links
+    assert "Трофеи" in links
 
 
 def test_current_page_is_marked(page):
@@ -268,7 +274,7 @@ def test_footer_has_hiscore_slot(page):
 
 def test_theme_script_has_game_features(site):
     script = (site / "_static" / "godot.js").read_text(encoding="utf-8")
-    for marker in ("site-achievement", "site-top", "site-mascot", "HI-SCORE"):
+    for marker in ("site-trophies", "site-level", "site-snake", "site-top", "site-mascot", "НУЛЕВОГО УРОВНЯ"):
         assert marker in script
     assert "AudioContext" not in script
 
@@ -323,3 +329,19 @@ def test_demo_hint_matches_demo_kind(page):
 def test_game_demo_matches_game_screen(page):
     screen = page("game/score.html").select_one("div.godot-demo-screen")
     assert "aspect-ratio: 400 / 256" in screen["style"]
+
+
+def test_screenshots_load_lazily(page):
+    images = page("intro/install.html").select("figure.screenshot img")
+    assert images
+    assert all(image.get("loading") == "lazy" for image in images)
+
+
+def test_sidebar_level_links_to_trophies(page):
+    level = page("intro/godot.html").select_one("aside.site-sidebar a.site-level")
+    assert level["href"] == "../appendix/trophies.html"
+    assert level.select_one(".site-level-fill") is not None
+
+
+def test_trophies_page_has_wall(page):
+    assert page("appendix/trophies.html").select_one("div.site-trophies") is not None

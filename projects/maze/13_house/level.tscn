@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://maze.tscn" id="1"]
+[ext_resource type="Script" path="res://debug_grid.gd" id="2"]
+[ext_resource type="PackedScene" path="res://hero.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://coins.tscn" id="4"]
+[ext_resource type="Script" path="res://level.gd" id="5"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://slime.tscn" id="7"]
+[ext_resource type="Resource" path="res://characters/red.tres" id="8"]
+[ext_resource type="Resource" path="res://characters/purple.tres" id="9"]
+[ext_resource type="Resource" path="res://characters/blue.tres" id="10"]
+[ext_resource type="Resource" path="res://characters/orange.tres" id="11"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("5")
+
+[node name="Maze" parent="." instance=ExtResource("1")]
+position = Vector2(0, 16)
+
+[node name="Coins" parent="Maze" instance=ExtResource("4")]
+
+[node name="Hero" parent="Maze" node_paths=PackedStringArray("maze") instance=ExtResource("3")]
+maze = NodePath("..")
+
+[node name="Slimes" type="Node2D" parent="Maze"]
+
+[node name="Red" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("8")
+start_cell = Vector2i(12, 5)
+
+[node name="Purple" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("9")
+start_cell = Vector2i(12, 7)
+
+[node name="Blue" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero", "partner") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("10")
+partner = NodePath("../Red")
+start_cell = Vector2i(11, 7)
+
+[node name="Orange" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("11")
+start_cell = Vector2i(13, 7)
+
+[node name="DebugGrid" type="Node2D" parent="Maze" node_paths=PackedStringArray("hero", "slimes")]
+z_index = 1
+script = ExtResource("2")
+hero = NodePath("../Hero")
+slimes = NodePath("../Slimes")
+
+[node name="Hud" parent="." instance=ExtResource("6")]
+
+[node name="Waves" type="Timer" parent="."]
+one_shot = true
+
+[node name="Idle" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="cell_entered" from="Maze/Hero" to="Maze/Coins" method="eat"]
+[connection signal="eaten" from="Maze/Coins" to="." method="_on_coins_eaten"]
+[connection signal="timeout" from="Waves" to="." method="_on_waves_timeout"]
+[connection signal="timeout" from="Idle" to="." method="_on_idle_timeout"]

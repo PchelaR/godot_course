@@ -10,7 +10,7 @@ from conftest import SOURCE
 
 sys.path.insert(0, str(SOURCE / "_ext"))
 
-from godot_course import archive_name, godot_docs_url, resolve_docname
+from godot_zero import archive_name, godot_docs_url, resolve_docname
 
 BASE = "https://docs.godotengine.org/en/4.7/classes/"
 
@@ -57,7 +57,7 @@ def test_archive_name():
 CONF = """
 import sys
 sys.path.insert(0, {ext!r})
-extensions = ["godot_course"]
+extensions = ["godot_zero"]
 godot_docs_version = "4.7"
 godot_projects_dir = "projects"
 """
@@ -224,7 +224,7 @@ def make_image(path: Path, size: tuple[int, int] = (120, 80), dpi: int = 72, alp
 def test_optimized_image_is_lossless(tmp_path, alpha):
     from PIL import Image
 
-    from godot_course import optimize_image
+    from godot_zero import optimize_image
 
     source = tmp_path / "editor-panel.png"
     make_image(source, alpha=alpha)
@@ -236,7 +236,7 @@ def test_optimized_image_is_lossless(tmp_path, alpha):
 
 
 def test_optimized_image_name_is_content_hash(tmp_path):
-    from godot_course import optimize_image
+    from godot_zero import optimize_image
 
     source = tmp_path / "editor-panel.png"
     make_image(source)
@@ -248,7 +248,7 @@ def test_optimized_image_name_is_content_hash(tmp_path):
 
 
 def test_hidpi_image_is_displayed_at_half_width(tmp_path):
-    from godot_course import optimize_image
+    from godot_zero import optimize_image
 
     regular = tmp_path / "regular.png"
     retina = tmp_path / "retina.png"
@@ -261,7 +261,7 @@ def test_hidpi_image_is_displayed_at_half_width(tmp_path):
 IMAGES_CONF = """
 import sys
 sys.path.insert(0, {ext!r})
-extensions = ["godot_course"]
+extensions = ["godot_zero"]
 """
 
 
@@ -404,7 +404,7 @@ def test_gdscript_lexer_has_no_errors(code):
 
 def test_diff_lines_marks_changes_and_skips_context():
     sys.path.insert(0, str(SOURCE / "_ext"))
-    from godot_course import diff_lines
+    from godot_zero import diff_lines
 
     old = [f"line {i}" for i in range(20)]
     new = old[:10] + ["added"] + old[11:]
@@ -431,3 +431,51 @@ def test_example_diff_and_debug_toggle(tmp_path):
     assert diff.select_one(".diff-del") is not None
     assert diff.select_one(".diff-add") is not None
     assert diff.select_one("div.highlight")["data-code"] == "extends Node"
+
+
+def test_demo_touch_pad_follows_scene_actions(tmp_path):
+    src = make_project(tmp_path)
+    scenes = src / "projects" / "examples"
+    (scenes / "hero.gd").write_text(
+        'extends Node2D\nfunc _process(_delta: float) -> void:\n\tInput.get_axis("move_left", "move_right")\n'
+        '\tInput.is_action_just_pressed("jump")\n',
+        encoding="utf-8",
+    )
+    (scenes / "hero.tscn").write_text(
+        '[gd_scene format=3]\n[ext_resource type="Script" path="res://hero.gd" id="1"]\n[node name="Hero" type="Node2D"]\n'
+        'script = ExtResource("1")\n',
+        encoding="utf-8",
+    )
+    (scenes / "sample.tscn").write_text(
+        '[gd_scene format=3]\n[ext_resource type="PackedScene" path="res://hero.tscn" id="1"]\n'
+        '[node name="Sample" type="Node2D"]\n[node name="Hero" parent="." instance=ExtResource("1")]\n',
+        encoding="utf-8",
+    )
+    out = tmp_path / "out"
+    assert build(src, out) == 0
+    pad = soup(out / "index.html").select_one("div.godot-demo div.godot-demo-pad")
+    assert pad.has_attr("hidden")
+    assert pad.select_one(".godot-demo-stick")["data-directions"] == "left right"
+    assert [key["data-action"] for key in pad.select(".godot-demo-key")] == ["jump"]
+
+
+def test_demo_without_keys_has_no_touch_pad(mini_site):
+    assert soup(mini_site / "index.html").select_one(".godot-demo-pad") is None
+
+
+def test_demo_hint_option_replaces_default_hint(tmp_path):
+    index = INDEX.replace("   :title: Пример\n", "   :title: Пример\n   :hint: Найдите все дискеты!\n")
+    src = make_project(tmp_path, index=index)
+    out = tmp_path / "out"
+    assert build(src, out) == 0
+    assert soup(out / "index.html").select_one("p.godot-demo-hint").get_text() == "Найдите все дискеты!"
+
+
+def test_demo_touch_hint_adds_touch_variant(tmp_path):
+    hints = "   :hint: Мышью.\n   :touch-hint: Пальцем.\n"
+    src = make_project(tmp_path, index=INDEX.replace("   :title: Пример\n", "   :title: Пример\n" + hints))
+    out = tmp_path / "out"
+    assert build(src, out) == 0
+    hint = soup(out / "index.html").select_one("p.godot-demo-hint")
+    assert hint.select_one(".godot-demo-mouse").get_text() == "Мышью."
+    assert hint.select_one(".godot-demo-touch").get_text() == "Пальцем."

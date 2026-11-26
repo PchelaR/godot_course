@@ -2,7 +2,11 @@
 
 {%- block htmltitle %}
 {%- if pagename == "404" %}<base href="{{ site_root }}">{%- endif %}
+{%- if pagename == root_doc %}
+<title>{{ docstitle|e }}</title>
+{%- else %}
 {{ super() }}
+{%- endif %}
 {%- endblock %}
 
 {%- block extrahead %}
@@ -18,7 +22,7 @@
 {%- block footer %}{% endblock %}
 
 {%- block content %}
-<div class="site" data-page="{{ pagename }}">
+<div class="site" data-page="{{ pagename }}" data-toc="{{ 'on' if display_toc else 'off' }}">
   <input type="checkbox" id="nav-toggle" class="site-nav-toggle">
   <aside class="site-sidebar">
     <div class="site-sidebar-head">
@@ -38,6 +42,11 @@
         <input type="search" name="q" placeholder="Поиск" aria-label="Поиск">
         <kbd class="site-search-key">/</kbd>
       </form>
+      <a class="site-level" href="{{ pathto('appendix/trophies') }}" title="Трофеи и уровень">
+        <span class="site-level-label">LVL <span class="site-level-value">0</span></span>
+        <span class="site-level-bar"><span class="site-level-fill"></span></span>
+        <span class="site-level-xp">0 / 100 XP</span>
+      </a>
       <nav class="site-nav">
         {{ toctree(collapse=False, maxdepth=4, titles_only=True, includehidden=True) }}
       </nav>
@@ -60,11 +69,11 @@
     {%- endif %}
     <footer class="site-footer">&copy; {{ copyright }}<p class="site-hiscore"></p></footer>
   </main>
+  {%- if display_toc %}
   <aside class="site-toc">
-    {%- if display_toc %}
     <p class="site-toc-title">На этой странице</p>
     {{ toc }}
-    {%- endif %}
   </aside>
+  {%- endif %}
 </div>
 {%- endblock %}

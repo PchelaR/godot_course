@@ -13,3 +13,7 @@
    animation
    coins
    score
+   slime
+   modes
+   characters
+   house

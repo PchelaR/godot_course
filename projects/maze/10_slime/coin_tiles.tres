@@ -1,0 +1,20 @@
+[gd_resource type="TileSet" load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/items/coin.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/crystal.png" id="2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_coin"]
+texture = ExtResource("1")
+0:0/0 = 0
+0:0/0/custom_data_0 = 10
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_crystal"]
+texture = ExtResource("2")
+0:0/0 = 0
+0:0/0/custom_data_0 = 50
+
+[resource]
+custom_data_layer_0/name = "points"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_coin")
+sources/1 = SubResource("TileSetAtlasSource_crystal")

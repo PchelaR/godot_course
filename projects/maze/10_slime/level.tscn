@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://maze.tscn" id="1"]
+[ext_resource type="Script" path="res://debug_grid.gd" id="2"]
+[ext_resource type="PackedScene" path="res://hero.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://coins.tscn" id="4"]
+[ext_resource type="Script" path="res://level.gd" id="5"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://slime.tscn" id="7"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("5")
+
+[node name="Maze" parent="." instance=ExtResource("1")]
+position = Vector2(0, 16)
+
+[node name="Coins" parent="Maze" instance=ExtResource("4")]
+
+[node name="Hero" parent="Maze" node_paths=PackedStringArray("maze") instance=ExtResource("3")]
+maze = NodePath("..")
+
+[node name="Slime" parent="Maze" node_paths=PackedStringArray("maze", "hero") instance=ExtResource("7")]
+maze = NodePath("..")
+hero = NodePath("../Hero")
+
+[node name="DebugGrid" type="Node2D" parent="Maze" node_paths=PackedStringArray("hero", "slime")]
+z_index = 1
+script = ExtResource("2")
+hero = NodePath("../Hero")
+slime = NodePath("../Slime")
+
+[node name="Hud" parent="." instance=ExtResource("6")]
+
+[connection signal="cell_entered" from="Maze/Hero" to="Maze/Coins" method="eat"]
+[connection signal="eaten" from="Maze/Coins" to="." method="_on_coins_eaten"]

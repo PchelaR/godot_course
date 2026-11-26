@@ -4,14 +4,14 @@
 
 Сайт публикуется сам: при каждом пуше в `master` GitHub Actions
 (`.github/workflows/site.yml`) прогоняет `make test`, собирает сайт через
-`make dist` и выкладывает его на `https://pchelar.github.io/godot_course/`.
+`make dist` и выкладывает его на `https://pchelar.github.io/godot-zero/`.
 HTTPS там уже есть, поэтому офлайн-режим работает сразу.
 
 Один раз в репозитории: **Settings → Pages → Build and deployment → Source:
 GitHub Actions**. Бесплатно Pages работает для публичных репозиториев.
 
 Сайт живёт в подпапке, поэтому сборка для Pages идёт с
-`SITE_ROOT=/godot_course/`: по этому адресу страница 404 находит стили и
+`SITE_ROOT=/godot-zero/`: по этому адресу страница 404 находит стили и
 картинки. Локально `SITE_ROOT` не нужен, по умолчанию `/`.
 
 Свой домен подключается там же, в Settings → Pages → Custom domain. Тогда сайт
@@ -19,7 +19,7 @@ GitHub Actions**. Бесплатно Pages работает для публич�
 
 # Деплой на VPS (запасной вариант)
 
-Сайт статический: nginx отдаёт готовые файлы из `/var/www/godot-course`.
+Сайт статический: nginx отдаёт готовые файлы из `/var/www/godot-zero`.
 Сборка идёт на вашем компьютере, на сервер копируется только результат.
 
 ## Один раз на сервере (Ubuntu)
@@ -27,16 +27,16 @@ GitHub Actions**. Бесплатно Pages работает для публич�
 ```bash
 sudo apt update
 sudo apt install nginx rsync
-sudo mkdir -p /var/www/godot-course
-sudo chown $USER:$USER /var/www/godot-course
+sudo mkdir -p /var/www/godot-zero
+sudo chown $USER:$USER /var/www/godot-zero
 ```
 
 Конфиг nginx из репозитория (`deploy/nginx.conf`) скопируйте на сервер в
-`/etc/nginx/sites-available/godot-course`, замените `example.com` на свой домен
+`/etc/nginx/sites-available/godot-zero`, замените `example.com` на свой домен
 (или IP-адрес сервера, пока домена нет) и включите:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/godot-course /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/godot-zero /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
 sudo nginx -t
 sudo systemctl reload nginx

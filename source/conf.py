@@ -11,7 +11,7 @@ language = "ru"
 
 extensions = [
     "sphinx_design",
-    "godot_course",
+    "godot_zero",
 ]
 
 godot_docs_version = "4.7"

@@ -1,5 +1,5 @@
 [project]
-name = "godot-course"
+name = "godot-zero"
 version = "0.1.0"
 description = "Russian-language documentation for the Godot engine and GDScript"
 requires-python = ">=3.14"
@@ -37,4 +37,4 @@ ignore = ["E501"]
 "tests/*" = ["E402"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["godot_course", "godot_pygments", "conftest"]
+known-first-party = ["godot_zero", "godot_pygments", "conftest"]
