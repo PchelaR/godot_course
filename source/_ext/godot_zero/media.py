@@ -166,6 +166,7 @@ BUTTONS = {
     "handbrake": "Ручник",
     "ui_accept": "Действие",
     "dash": "Рывок",
+    "pause": "Пауза",
 }
 SPACE_ACTIONS = ("jump", "handbrake", "ui_accept")
 ACTION_PATTERN = re.compile(r'"(' + "|".join([*DIRECTIONS, *BUTTONS]) + r')"')

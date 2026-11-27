@@ -1,0 +1,137 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="AudioStream" path="res://assets/sounds/slime_caught.wav" id="sound"]
+[ext_resource type="Script" path="res://slime/slime.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/enemies/enemy_eyes.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/enemies/enemy_scared.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/enemies/enemy_scared_face.png" id="5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_0"]
+atlas = ExtResource("4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_1"]
+atlas = ExtResource("4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_2"]
+atlas = ExtResource("4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_3"]
+atlas = ExtResource("4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_body"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_2")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_1")
+}],
+"loop": true,
+"name": &"scared",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_0"]
+atlas = ExtResource("5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_1"]
+atlas = ExtResource("5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_2"]
+atlas = ExtResource("5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_3"]
+atlas = ExtResource("5")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_face"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_2")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_1")
+}],
+"loop": true,
+"name": &"scared",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
+radius = 4.0
+
+[node name="Slime" type="Node2D"]
+script = ExtResource("1")
+speed = 50.0
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+
+[node name="Eyes" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+hframes = 2
+
+[node name="Scared" type="Node2D" parent="."]
+visible = false
+
+[node name="Body" type="AnimatedSprite2D" parent="Scared"]
+sprite_frames = SubResource("SpriteFrames_body")
+animation = &"scared"
+
+[node name="Face" type="AnimatedSprite2D" parent="Scared"]
+sprite_frames = SubResource("SpriteFrames_face")
+animation = &"scared"
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_hitbox")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+
+[node name="CaughtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("sound")
+volume_db = -18.0

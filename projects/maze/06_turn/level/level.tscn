@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://maze/maze.tscn" id="1"]
+[ext_resource type="Script" path="res://debug/debug_grid.gd" id="2"]
+[ext_resource type="PackedScene" path="res://hero/hero.tscn" id="3"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Maze" parent="." instance=ExtResource("1")]
+position = Vector2(0, 16)
+
+[node name="Hero" parent="Maze" node_paths=PackedStringArray("maze") instance=ExtResource("3")]
+maze = NodePath("..")
+
+[node name="DebugGrid" type="Node2D" parent="Maze" node_paths=PackedStringArray("hero")]
+z_index = 1
+script = ExtResource("2")
+hero = NodePath("../Hero")

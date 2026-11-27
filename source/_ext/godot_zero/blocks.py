@@ -14,6 +14,15 @@ from godot_pygments import GodotLexer
 from .common import logger
 
 
+def display_name(path: Path) -> str:
+    for parent in path.parents:
+        if (parent / "project.godot").is_file():
+            if parent.name == "examples":
+                return path.name
+            return path.relative_to(parent).as_posix()
+    return path.name
+
+
 def build_example(directive: SphinxDirective, name: str) -> list[nodes.Node]:
     root = Path(directive.config.godot_projects_dir)
     script = root / "examples" / f"{name}.gd"
@@ -26,7 +35,8 @@ def build_example(directive: SphinxDirective, name: str) -> list[nodes.Node]:
     source = script.read_text(encoding="utf-8").expandtabs(4).rstrip("\n")
 
     header = nodes.paragraph(classes=["example-header"])
-    header += nodes.inline(script.name, script.name, classes=["example-file"])
+    label = display_name(script)
+    header += nodes.inline(label, label, classes=["example-file"])
     header += nodes.inline("GDScript", "GDScript", classes=["example-lang"])
 
     code = nodes.literal_block(source, source, language="gdscript")
@@ -189,7 +199,7 @@ class ExampleDiffDirective(SphinxDirective):
         node = example_diff()
         node["new"] = new
         node["lines"] = diff_lines(old.split("\n"), new.split("\n"))
-        node["name"] = self.options.get("name", paths[1].name)
+        node["name"] = self.options.get("name", display_name(paths[1]))
         return [node]
 
 

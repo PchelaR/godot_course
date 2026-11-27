@@ -68,17 +68,27 @@ def test_navigation_contains_chapters(page):
     assert "3. Разработка игры" in links
     assert "3.1. Замысел игры" in links
     assert "3.2. Проект и пиксельная графика" in links
-    assert "3.3. Лабиринт" in links
-    assert "3.4. Движение по клеткам" in links
-    assert "3.5. Поворот заранее" in links
-    assert "3.6. Туннель" in links
-    assert "3.7. Анимация героя" in links
-    assert "3.8. Монеты" in links
-    assert "3.9. Счёт" in links
-    assert "3.10. Первый слайм" in links
-    assert "3.11. Режимы слайма" in links
-    assert "3.12. Характеры слаймов" in links
-    assert "3.13. Дом слаймов" in links
+    assert "3.3. Порядок в проекте" in links
+    assert "3.4. Лабиринт" in links
+    assert "3.5. Движение по клеткам" in links
+    assert "3.6. Поворот заранее" in links
+    assert "3.7. Туннель" in links
+    assert "3.8. Анимация героя" in links
+    assert "3.9. Монеты" in links
+    assert "3.10. Счёт" in links
+    assert "3.11. Первый слайм" in links
+    assert "3.12. Режимы слайма" in links
+    assert "3.13. Характеры слаймов" in links
+    assert "3.14. Дом слаймов" in links
+    assert "3.15. Испуг" in links
+    assert "3.16. Кто кого поймал" in links
+    assert "3.17. Жизни" in links
+    assert "3.18. Уровни" in links
+    assert "3.19. Меню, пауза и Game Over" in links
+    assert "3.20. Рекорд" in links
+    assert "3.21. Камера" in links
+    assert "3.22. Звук" in links
+    assert "3.23. Сборка игры" in links
     assert "4. Рецепты" in links
     assert "4.1. Движение" in links
     assert "4.1.3. Платформер" in links
@@ -308,10 +318,10 @@ def test_fun_fact_blocks(page, name):
 
 def test_game_demo_uses_project_pack(site, page):
     demo = page("game/maze.html").select_one("div.godot-demo")
-    assert demo["data-src"].endswith("_static/godot/index.html?pack=maze-03_maze.pck")
+    assert demo["data-src"].endswith("_static/godot/index.html?pack=maze-04_maze.pck")
     shell = (site / "_static" / "godot" / "index.html").read_text(encoding="utf-8")
     assert 'get("pack")' in shell
-    pack = (site / "_static" / "godot" / "maze-03_maze.pck").read_bytes()
+    pack = (site / "_static" / "godot" / "maze-04_maze.pck").read_bytes()
     assert b"global_script_class_cache" in pack, "pack was exported without class_name cache, rerun make demos"
 
 

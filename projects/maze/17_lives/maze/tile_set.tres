@@ -1,0 +1,16 @@
+[gd_resource type="TileSet" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/maze/tiles.png" id="1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiles"]
+texture = ExtResource("1")
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+2:0/0 = 0
+2:0/0/custom_data_0 = true
+
+[resource]
+custom_data_layer_0/name = "wall"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_tiles")

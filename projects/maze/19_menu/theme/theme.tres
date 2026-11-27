@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3]
+
+[ext_resource type="FontFile" path="res://assets/ui/press_start_2p.ttf" id="1"]
+
+[resource]
+default_font = ExtResource("1")
+default_font_size = 8
+Label/colors/font_color = Color(0.9373, 0.8863, 0.8, 1)

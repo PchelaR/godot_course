@@ -6,6 +6,7 @@
 
    design
    project
+   structure
    maze
    movement
    turning
@@ -17,3 +18,12 @@
    modes
    characters
    house
+   fright
+   catch
+   lives
+   levels
+   menu
+   record
+   camera
+   sound
+   build

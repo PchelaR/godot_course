@@ -321,6 +321,19 @@ def test_example_directive(tmp_path):
     assert second.select_one("div.example-output") is None
 
 
+def test_example_in_game_project_shows_path_inside_project(tmp_path):
+    src = tmp_path / "src"
+    game = src / "projects" / "game"
+    (game / "hero").mkdir(parents=True)
+    (game / "project.godot").write_text("config_version=5\n", encoding="utf-8")
+    (game / "hero" / "hero.gd").write_text("extends Node\n", encoding="utf-8")
+    (src / "conf.py").write_text(CONF.format(ext=str(SOURCE / "_ext")), encoding="utf-8")
+    (src / "index.rst").write_text("Тест\n====\n\n.. example:: game/hero/hero\n", encoding="utf-8")
+    out = tmp_path / "out"
+    assert build(src, out) == 0
+    assert soup(out / "index.html").select_one(".example-file").get_text() == "hero/hero.gd"
+
+
 def test_missing_example_fails_strict_build(tmp_path):
     src = tmp_path / "src"
     src.mkdir()

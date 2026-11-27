@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://slime/slime.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/enemies/enemy_red.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/enemies/enemy_eyes.png" id="3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_1"]
+atlas = ExtResource("2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slime"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_1")
+}],
+"loop": true,
+"name": &"move",
+"speed": 6.0
+}]
+
+[node name="Slime" type="Node2D"]
+script = ExtResource("1")
+start_cell = Vector2i(12, 5)
+speed = 50.0
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_slime")
+animation = &"move"
+autoplay = "move"
+
+[node name="Eyes" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+hframes = 2

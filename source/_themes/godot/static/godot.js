@@ -884,6 +884,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dash: { code: "ShiftLeft", key: "Shift" },
     interact: { code: "KeyE", key: "e" },
     shoot: { code: "KeyF", key: "f" },
+    pause: { code: "KeyP", key: "p" },
   };
 
   const setupPad = (demo) => {

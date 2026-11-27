@@ -1,0 +1,95 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="PackedScene" path="res://maze/maze.tscn" id="1"]
+[ext_resource type="Script" path="res://debug/debug_grid.gd" id="2"]
+[ext_resource type="PackedScene" path="res://hero/hero.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://coins/coins.tscn" id="4"]
+[ext_resource type="Script" path="res://level/level.gd" id="5"]
+[ext_resource type="PackedScene" path="res://hud/hud.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://slime/slime.tscn" id="7"]
+[ext_resource type="Resource" path="res://slime/characters/red.tres" id="8"]
+[ext_resource type="Resource" path="res://slime/characters/purple.tres" id="9"]
+[ext_resource type="Resource" path="res://slime/characters/blue.tres" id="10"]
+[ext_resource type="Resource" path="res://slime/characters/orange.tres" id="11"]
+[ext_resource type="Script" path="res://level/difficulty.gd" id="12"]
+[ext_resource type="Resource" path="res://level/difficulties/level_1.tres" id="13"]
+[ext_resource type="Resource" path="res://level/difficulties/level_2.tres" id="14"]
+[ext_resource type="Resource" path="res://level/difficulties/level_3.tres" id="15"]
+[ext_resource type="PackedScene" path="res://pause/pause.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://shake_camera/shake_camera.tscn" id="17"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("5")
+difficulties = Array[ExtResource("12")]([ExtResource("13"), ExtResource("14"), ExtResource("15")])
+
+[node name="Maze" parent="." instance=ExtResource("1")]
+position = Vector2(0, 16)
+
+[node name="Coins" parent="Maze" instance=ExtResource("4")]
+
+[node name="Hero" parent="Maze" node_paths=PackedStringArray("maze") instance=ExtResource("3")]
+maze = NodePath("..")
+
+[node name="Slimes" type="Node2D" parent="Maze"]
+
+[node name="Red" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("8")
+start_cell = Vector2i(12, 5)
+
+[node name="Purple" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("9")
+start_cell = Vector2i(12, 7)
+
+[node name="Blue" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero", "partner") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("10")
+partner = NodePath("../Red")
+start_cell = Vector2i(11, 7)
+
+[node name="Orange" parent="Maze/Slimes" node_paths=PackedStringArray("maze", "hero") instance=ExtResource("7")]
+maze = NodePath("../..")
+hero = NodePath("../../Hero")
+character = ExtResource("11")
+start_cell = Vector2i(13, 7)
+
+[node name="DebugGrid" type="Node2D" parent="Maze" node_paths=PackedStringArray("hero", "slimes")]
+z_index = 1
+script = ExtResource("2")
+hero = NodePath("../Hero")
+slimes = NodePath("../Slimes")
+
+[node name="Camera" parent="." instance=ExtResource("17")]
+position = Vector2(200, 128)
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="Interface" instance=ExtResource("6")]
+
+[node name="Pause" parent="Interface" instance=ExtResource("16")]
+
+[node name="Waves" type="Timer" parent="."]
+one_shot = true
+
+[node name="Fright" type="Timer" parent="."]
+one_shot = true
+
+[node name="Idle" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="cell_entered" from="Maze/Hero" to="Maze/Coins" method="eat"]
+[connection signal="eaten" from="Maze/Coins" to="." method="_on_coins_eaten"]
+[connection signal="powered" from="Maze/Coins" to="." method="_on_coins_powered"]
+[connection signal="timeout" from="Waves" to="." method="_on_waves_timeout"]
+[connection signal="timeout" from="Idle" to="." method="_on_idle_timeout"]
+[connection signal="timeout" from="Fright" to="." method="_on_fright_timeout"]
+[connection signal="touched" from="Maze/Slimes/Red" to="." method="_on_slime_touched"]
+[connection signal="touched" from="Maze/Slimes/Purple" to="." method="_on_slime_touched"]
+[connection signal="touched" from="Maze/Slimes/Blue" to="." method="_on_slime_touched"]
+[connection signal="touched" from="Maze/Slimes/Orange" to="." method="_on_slime_touched"]
+[connection signal="cleared" from="Maze/Coins" to="." method="_on_coins_cleared"]
