@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://plot/plot.gd" id="1_plot"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_plot"]
+radius = 30.0
+
+[node name="Plot" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("1_plot")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_plot")
+
+[node name="Ring" type="Polygon2D" parent="."]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(30.0, 0.0, 29.4, 5.9, 27.7, 11.5, 24.9, 16.7, 21.2, 21.2, 16.7, 24.9, 11.5, 27.7, 5.9, 29.4, 0.0, 30.0, -5.9, 29.4, -11.5, 27.7, -16.7, 24.9, -21.2, 21.2, -24.9, 16.7, -27.7, 11.5, -29.4, 5.9, -30.0, 0.0, -29.4, -5.9, -27.7, -11.5, -24.9, -16.7, -21.2, -21.2, -16.7, -24.9, -11.5, -27.7, -5.9, -29.4, -0.0, -30.0, 5.9, -29.4, 11.5, -27.7, 16.7, -24.9, 21.2, -21.2, 24.9, -16.7, 27.7, -11.5, 29.4, -5.9)
+
+[node name="Inside" type="Polygon2D" parent="."]
+color = Color(0.9569, 0.8941, 0.7882, 1)
+polygon = PackedVector2Array(24.0, 0.0, 23.5, 4.7, 22.2, 9.2, 20.0, 13.3, 17.0, 17.0, 13.3, 20.0, 9.2, 22.2, 4.7, 23.5, 0.0, 24.0, -4.7, 23.5, -9.2, 22.2, -13.3, 20.0, -17.0, 17.0, -20.0, 13.3, -22.2, 9.2, -23.5, 4.7, -24.0, 0.0, -23.5, -4.7, -22.2, -9.2, -20.0, -13.3, -17.0, -17.0, -13.3, -20.0, -9.2, -22.2, -4.7, -23.5, -0.0, -24.0, 4.7, -23.5, 9.2, -22.2, 13.3, -20.0, 17.0, -17.0, 20.0, -13.3, 22.2, -9.2, 23.5, -4.7)

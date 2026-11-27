@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[node name="Archer" type="Node2D"]
+
+[node name="Base" type="Polygon2D" parent="."]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-22.0, -22.0, 22.0, -22.0, 22.0, 22.0, -22.0, 22.0)
+

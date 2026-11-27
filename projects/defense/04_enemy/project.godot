@@ -1,0 +1,21 @@
+config_version=5
+
+[application]
+
+config/name="Godot: нулевой уровень — 4.4 Враг на дороге"
+run/main_scene="res://level/level.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1152
+window/size/viewport_height=648
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.9922, 0.9569, 0.8902, 1)

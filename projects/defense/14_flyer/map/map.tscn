@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://map/road_look.gd" id="1_look"]
+[ext_resource type="PackedScene" path="res://plot/plot.tscn" id="2_plot"]
+
+[sub_resource type="Curve2D" id="Curve2D_road"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -40, 150, -56, -15, 56, 15, 280, 150, -8, -40, 8, 40, 330, 250, -10, -38, 10, 38, 330, 420, -44, -12, 44, 12, 400, 500, -42, 12, 42, -12, 620, 500, -9, 36, 9, -36, 680, 420, -9, 34, 9, -34, 680, 260, -39, 10, 39, -10, 740, 190, -39, -10, 39, 10, 940, 190, -9, -34, 9, 34, 1000, 260, -9, -33, 9, 33, 1000, 420, -30, -9, 30, 9, 1060, 480, 0, 0, 0, 0, 1200, 480)
+}
+point_count = 14
+
+[node name="Map" type="Node2D"]
+
+[node name="RoadLook" type="Line2D" parent="." node_paths=PackedStringArray("road")]
+width = 56.0
+default_color = Color(0.9569, 0.8941, 0.7882, 1)
+joint_mode = 2
+script = ExtResource("1_look")
+road = NodePath("../Road")
+
+[node name="Road" type="Path2D" parent="." groups=["road"]]
+curve = SubResource("Curve2D_road")
+
+[node name="Plots" type="Node2D" parent="."]
+
+[node name="Plot1" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(160, 250)
+
+[node name="Plot2" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(440, 320)
+
+[node name="Plot3" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(220, 400)
+
+[node name="Plot4" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(520, 410)
+
+[node name="Plot5" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(580, 330)
+
+[node name="Plot6" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(790, 300)
+
+[node name="Plot7" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(840, 100)
+
+[node name="Plot8" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(900, 360)
+
+[node name="Plot9" parent="Plots" instance=ExtResource("2_plot")]
+position = Vector2(1080, 360)
+
+[node name="Base" type="Polygon2D" parent="."]
+position = Vector2(1110, 480)
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(-32.0, -32.0, 32.0, -32.0, 32.0, 32.0, -32.0, 32.0)
+

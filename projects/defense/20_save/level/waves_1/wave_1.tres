@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://waves/wave.gd" id="1_wave"]
+[ext_resource type="PackedScene" path="res://enemy/enemy.tscn" id="2_enemy"]
+
+[resource]
+script = ExtResource("1_wave")
+enemy_scene = ExtResource("2_enemy")
+count = 6
+interval = 1.2
+pause_after = 8.0

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://archer/archer.gd" id="1_archer"]
+[ext_resource type="PackedScene" path="res://arrow/arrow.tscn" id="2_arrow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_range"]
+radius = 160.0
+
+[node name="Archer" type="Node2D"]
+script = ExtResource("1_archer")
+arrow_scene = ExtResource("2_arrow")
+
+[node name="Base" type="Polygon2D" parent="."]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-22.0, -22.0, 22.0, -22.0, 22.0, 22.0, -22.0, 22.0)
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 5
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_range")
+
+[node name="Reload" type="Timer" parent="."]
+wait_time = 0.8
+autostart = true
+
+[connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]

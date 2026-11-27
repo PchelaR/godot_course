@@ -65,7 +65,7 @@ def test_navigation_contains_chapters(page):
     assert "2.7. Экспорт переменных" in links
     assert "2.8. Сигналы" in links
     assert "2.9. Экземпляры сцен из кода" in links
-    assert "3. Разработка игры" in links
+    assert "3. Разработка простой игры" in links
     assert "3.1. Замысел игры" in links
     assert "3.2. Проект и пиксельная графика" in links
     assert "3.3. Порядок в проекте" in links
@@ -89,11 +89,17 @@ def test_navigation_contains_chapters(page):
     assert "3.21. Камера" in links
     assert "3.22. Звук" in links
     assert "3.23. Сборка игры" in links
-    assert "4. Рецепты" in links
-    assert "4.1. Движение" in links
-    assert "4.1.3. Платформер" in links
-    assert "4.2. Враги" in links
-    assert "4.3. Камера" in links
+    assert "4. Разработка игры посложнее" in links
+    assert "4.1. Замысел игры" in links
+    assert "4.13. Солдаты возвращаются" in links
+    assert "4.21. Эффекты" in links
+    assert "5. Рецепты" in links
+    assert "5.1. Движение" in links
+    assert "5.1.3. Платформер" in links
+    assert "5.2. Враги" in links
+    assert "5.3. Камера" in links
+    assert "5.4. Атака" in links
+    assert "5.5. Строительство" in links
     assert "Восемь направлений" in links
     assert "Глоссарий" in links
     assert "Трофеи" in links
@@ -134,7 +140,7 @@ def test_mobile_menu_toggle(page):
 
 def test_cards_on_index(page):
     cards = page("index.html").select(".sd-card")
-    assert len(cards) == 5
+    assert len(cards) == 6
 
 
 def test_chapter_links_glossary(page):

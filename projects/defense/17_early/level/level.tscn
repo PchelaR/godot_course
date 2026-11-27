@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://level/level.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://hud/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://build_menu/build_menu.tscn" id="6_menu"]
+[ext_resource type="PackedScene" path="res://tower_menu/tower_menu.tscn" id="7_tower_menu"]
+[ext_resource type="PackedScene" path="res://map/map.tscn" id="2_map"]
+[ext_resource type="PackedScene" path="res://waves/waves.tscn" id="3_waves"]
+[ext_resource type="Script" path="res://waves/wave.gd" id="4_wave"]
+[ext_resource type="Resource" path="res://level/waves/wave_1.tres" id="w1"]
+[ext_resource type="Resource" path="res://level/waves/wave_2.tres" id="w2"]
+[ext_resource type="Resource" path="res://level/waves/wave_3.tres" id="w3"]
+[ext_resource type="Resource" path="res://level/waves/wave_4.tres" id="w4"]
+[ext_resource type="Resource" path="res://level/waves/wave_5.tres" id="w5"]
+[ext_resource type="Resource" path="res://level/waves/wave_6.tres" id="w6"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Map" parent="." instance=ExtResource("2_map")]
+
+[node name="Waves" parent="." node_paths=PackedStringArray("road") instance=ExtResource("3_waves")]
+waves = Array[ExtResource("4_wave")]([ExtResource("w1"), ExtResource("w2"), ExtResource("w3"), ExtResource("w4"), ExtResource("w5"), ExtResource("w6")])
+road = NodePath("../Map/Road")
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="Interface" instance=ExtResource("5_hud")]
+
+[node name="BuildMenu" parent="Interface" instance=ExtResource("6_menu")]
+
+[node name="TowerMenu" parent="Interface" instance=ExtResource("7_tower_menu")]
+
+[connection signal="wave_started" from="Waves" to="." method="_on_waves_wave_started"]
+[connection signal="enemy_spawned" from="Waves" to="." method="_on_waves_enemy_spawned"]
+[connection signal="picked" from="Interface/BuildMenu" to="." method="_on_build_menu_picked"]
+[connection signal="upgrade_pressed" from="Interface/TowerMenu" to="." method="_on_tower_menu_upgrade_pressed"]
+[connection signal="sell_pressed" from="Interface/TowerMenu" to="." method="_on_tower_menu_sell_pressed"]
+[connection signal="break_started" from="Waves" to="." method="_on_waves_break_started"]
+[connection signal="call_pressed" from="Interface/Hud" to="." method="_on_hud_call_pressed"]
+[connection signal="rally_pressed" from="Interface/TowerMenu" to="." method="_on_tower_menu_rally_pressed"]

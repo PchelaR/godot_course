@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://barracks/barracks.gd" id="1_barracks"]
+[ext_resource type="PackedScene" path="res://soldier/soldier.tscn" id="2_soldier"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_range"]
+radius = 140.0
+
+[node name="Barracks" type="Node2D"]
+script = ExtResource("1_barracks")
+soldier_scene = ExtResource("2_soldier")
+
+[node name="Base" type="Polygon2D" parent="."]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(-22.0, -22.0, 22.0, -22.0, 22.0, 22.0, -22.0, 22.0)
+
+[node name="Mark" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.9922, 0.9569, 0.8902, 1)
+polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_range")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://float_text/float_text.gd" id="1_text"]
+[ext_resource type="Theme" path="res://theme/theme.tres" id="2_theme"]
+
+[node name="FloatText" type="Label"]
+z_index = 2
+offset_right = 80.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(0.9098, 0.3333, 0.1843, 1)
+text = "+10"
+horizontal_alignment = 1
+script = ExtResource("1_text")

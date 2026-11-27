@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://enemy/enemy.tscn" id="1_enemy"]
+
+[node name="Flyer" instance=ExtResource("1_enemy")]
+speed = 80.0
+health = 6
+reward = 15
+flying = true
+
+[node name="Look" parent="." index="0"]
+rotation = 0.7853982
+scale = Vector2(0.8, 0.8)
+
+[node name="Body" parent="." index="1"]
+collision_layer = 4

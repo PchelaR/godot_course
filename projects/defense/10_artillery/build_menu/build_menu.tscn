@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://build_menu/build_menu.gd" id="1_menu"]
+[ext_resource type="Script" path="res://build_menu/tower_button.gd" id="2_button"]
+[ext_resource type="Resource" path="res://archer/archer_data.tres" id="3_archer"]
+[ext_resource type="Theme" path="res://theme/theme.tres" id="4_theme"]
+[ext_resource type="Resource" path="res://artillery/artillery_data.tres" id="5_artillery"]
+
+[node name="BuildMenu" type="Node2D"]
+script = ExtResource("1_menu")
+
+[node name="Archer" type="Button" parent="."]
+offset_left = -100.0
+offset_top = -60.0
+offset_right = -44.0
+offset_bottom = -4.0
+theme = ExtResource("4_theme")
+script = ExtResource("2_button")
+data = ExtResource("3_archer")
+
+[node name="Icon" type="Node2D" parent="Archer"]
+position = Vector2(28, 28)
+scale = Vector2(0.7, 0.7)
+
+[node name="Base" type="Polygon2D" parent="Archer/Icon"]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-22.0, -22.0, 22.0, -22.0, 22.0, 22.0, -22.0, 22.0)
+
+[node name="Price" type="Label" parent="Archer"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 60.0
+offset_right = 64.0
+offset_bottom = 80.0
+text = "70"
+horizontal_alignment = 1
+
+[node name="Artillery" type="Button" parent="."]
+offset_left = -28.0
+offset_top = -110.0
+offset_right = 28.0
+offset_bottom = -54.0
+theme = ExtResource("4_theme")
+script = ExtResource("2_button")
+data = ExtResource("5_artillery")
+
+[node name="Icon" type="Node2D" parent="Artillery"]
+position = Vector2(28, 28)
+scale = Vector2(0.7, 0.7)
+
+[node name="Base" type="Polygon2D" parent="Artillery/Icon"]
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(-22.0, -22.0, 22.0, -22.0, 22.0, 22.0, -22.0, 22.0)
+
+[node name="Price" type="Label" parent="Artillery"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 60.0
+offset_right = 64.0
+offset_bottom = 80.0
+text = "100"
+horizontal_alignment = 1

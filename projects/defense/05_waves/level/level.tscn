@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://map/map.tscn" id="2_map"]
+[ext_resource type="PackedScene" path="res://waves/waves.tscn" id="3_waves"]
+[ext_resource type="Script" path="res://waves/wave.gd" id="4_wave"]
+[ext_resource type="Resource" path="res://level/waves/wave_1.tres" id="w1"]
+[ext_resource type="Resource" path="res://level/waves/wave_2.tres" id="w2"]
+[ext_resource type="Resource" path="res://level/waves/wave_3.tres" id="w3"]
+[ext_resource type="Resource" path="res://level/waves/wave_4.tres" id="w4"]
+[ext_resource type="Resource" path="res://level/waves/wave_5.tres" id="w5"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("2_map")]
+
+[node name="Waves" parent="." node_paths=PackedStringArray("road") instance=ExtResource("3_waves")]
+waves = Array[ExtResource("4_wave")]([ExtResource("w1"), ExtResource("w2"), ExtResource("w3"), ExtResource("w4"), ExtResource("w5")])
+road = NodePath("../Map/Road")

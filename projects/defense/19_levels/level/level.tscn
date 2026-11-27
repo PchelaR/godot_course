@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://level/level.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://waves/waves.tscn" id="2_waves"]
+[ext_resource type="PackedScene" path="res://hud/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://build_menu/build_menu.tscn" id="4_menu"]
+[ext_resource type="PackedScene" path="res://tower_menu/tower_menu.tscn" id="5_tower_menu"]
+[ext_resource type="PackedScene" path="res://result/result.tscn" id="6_result"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Waves" parent="." instance=ExtResource("2_waves")]
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="Interface" instance=ExtResource("3_hud")]
+
+[node name="BuildMenu" parent="Interface" instance=ExtResource("4_menu")]
+
+[node name="TowerMenu" parent="Interface" instance=ExtResource("5_tower_menu")]
+
+[node name="Result" parent="Interface" instance=ExtResource("6_result")]
+
+[connection signal="wave_started" from="Waves" to="." method="_on_waves_wave_started"]
+[connection signal="enemy_spawned" from="Waves" to="." method="_on_waves_enemy_spawned"]
+[connection signal="break_started" from="Waves" to="." method="_on_waves_break_started"]
+[connection signal="finished" from="Waves" to="." method="_on_waves_finished"]
+[connection signal="call_pressed" from="Interface/Hud" to="." method="_on_hud_call_pressed"]
+[connection signal="picked" from="Interface/BuildMenu" to="." method="_on_build_menu_picked"]
+[connection signal="upgrade_pressed" from="Interface/TowerMenu" to="." method="_on_tower_menu_upgrade_pressed"]
+[connection signal="sell_pressed" from="Interface/TowerMenu" to="." method="_on_tower_menu_sell_pressed"]
+[connection signal="rally_pressed" from="Interface/TowerMenu" to="." method="_on_tower_menu_rally_pressed"]

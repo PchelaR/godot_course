@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://level/level.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://map/map.tscn" id="2_map"]
+[ext_resource type="PackedScene" path="res://enemy/enemy.tscn" id="3_enemy"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_level")
+enemy_scene = ExtResource("3_enemy")
+
+[node name="Map" parent="." instance=ExtResource("2_map")]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

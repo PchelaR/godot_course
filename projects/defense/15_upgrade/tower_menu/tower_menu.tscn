@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://tower_menu/tower_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://theme/theme.tres" id="2_theme"]
+
+[node name="TowerMenu" type="Node2D"]
+script = ExtResource("1_menu")
+
+[node name="Upgrade" type="Button" parent="."]
+offset_left = -100.0
+offset_top = -60.0
+offset_right = -44.0
+offset_bottom = -4.0
+theme = ExtResource("2_theme")
+theme_override_font_sizes/font_size = 24
+text = "+"
+
+[node name="Price" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 60.0
+offset_right = 64.0
+offset_bottom = 80.0
+text = "60"
+horizontal_alignment = 1
+
+[node name="Sell" type="Button" parent="."]
+offset_left = 44.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = -4.0
+theme = ExtResource("2_theme")
+theme_override_font_sizes/font_size = 24
+text = "$"
+
+[node name="Price" type="Label" parent="Sell"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 60.0
+offset_right = 64.0
+offset_bottom = 80.0
+text = "+42"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="Sell" to="." method="_on_sell_pressed"]

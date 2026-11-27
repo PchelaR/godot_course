@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://level/level.tscn" id="1_level"]
+[ext_resource type="PackedScene" path="res://map/map_2.tscn" id="2_map"]
+[ext_resource type="Script" path="res://waves/wave.gd" id="3_wave"]
+[ext_resource type="Resource" path="res://level/waves_2/wave_1.tres" id="w1"]
+[ext_resource type="Resource" path="res://level/waves_2/wave_2.tres" id="w2"]
+[ext_resource type="Resource" path="res://level/waves_2/wave_3.tres" id="w3"]
+[ext_resource type="Resource" path="res://level/waves_2/wave_4.tres" id="w4"]
+[ext_resource type="Resource" path="res://level/waves_2/wave_5.tres" id="w5"]
+[ext_resource type="Resource" path="res://level/waves_2/wave_6.tres" id="w6"]
+[ext_resource type="Resource" path="res://level/waves_2/wave_7.tres" id="w7"]
+
+[node name="Level2" instance=ExtResource("1_level")]
+number = 2
+money = 250
+map_scene = ExtResource("2_map")
+
+[node name="Waves" parent="."]
+waves = Array[ExtResource("3_wave")]([ExtResource("w1"), ExtResource("w2"), ExtResource("w3"), ExtResource("w4"), ExtResource("w5"), ExtResource("w6"), ExtResource("w7")])

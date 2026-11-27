@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_enemy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 15.0
+
+[node name="Enemy" type="PathFollow2D"]
+rotates = false
+loop = false
+script = ExtResource("1_enemy")
+
+[node name="Look" type="Polygon2D" parent="."]
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(-13.0, -13.0, 13.0, -13.0, 13.0, 13.0, -13.0, 13.0)
+
+[node name="Body" type="Area2D" parent="."]
+collision_mask = 0
+monitoring = false
+
+[node name="Shape" type="CollisionShape2D" parent="Body"]
+shape = SubResource("CircleShape2D_body")
+
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2(-16, -26)
+
+[node name="Back" type="Polygon2D" parent="HealthBar"]
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(-1, -1, 33, -1, 33, 6, -1, 6)
+
+[node name="Fill" type="Polygon2D" parent="HealthBar"]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 5, 0, 5)

@@ -50,14 +50,21 @@ Godot: нулевой уровень
       Связь скрипта и узла, сцены, обращение к узлам, координаты, ввод, сигналы,
       создание объектов из кода.
 
-   .. grid-item-card:: 3. Разработка игры
+   .. grid-item-card:: 3. Разработка простой игры
       :link: game/index
       :link-type: doc
 
       Аналог Pac-Man от замысла до экспорта: движение по клеткам, враги со
       своим характером, интерфейс.
 
-   .. grid-item-card:: 4. Рецепты
+   .. grid-item-card:: 4. Разработка игры посложнее
+      :link: defense/index
+      :link-type: doc
+
+      Tower defense по мотивам Kingdom Rush: волны врагов, три вида башен,
+      деньги, звёзды за прохождение и выбор уровня.
+
+   .. grid-item-card:: 5. Рецепты
       :link: recipes/index
       :link-type: doc
 
@@ -72,6 +79,7 @@ Godot: нулевой уровень
    gdscript/index
    basics/index
    game/index
+   defense/index
    recipes/index
 
 .. toctree::
