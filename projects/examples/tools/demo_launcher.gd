@@ -2,6 +2,7 @@ extends Node
 
 const DEFAULT_SCENE: String = "res://basics/script_and_node/spinner.tscn"
 const CAMERA_SCRIPT: String = "res://tools/demo_camera.gd"
+const PAINTED: Array[String] = ["color", "default_color", "theme_override_colors/font_color"]
 const THEME_QUERY: String = (
 	"(() => { try { return window.parent.document.documentElement.dataset.theme || 'dark'; }"
 	+ " catch (error) { return 'dark'; } })()"
@@ -40,6 +41,7 @@ func _ready() -> void:
 		add_camera()
 	if OS.has_feature("web"):
 		collect_colors(demo)
+		get_tree().node_added.connect(_on_node_added)
 		sync_theme()
 		var timer := Timer.new()
 		timer.wait_time = 0.3
@@ -58,7 +60,7 @@ func add_camera() -> void:
 
 
 func collect_colors(node: Node) -> void:
-	for property: String in ["color", "default_color"]:
+	for property: String in PAINTED:
 		var value: Variant = node.get(property)
 		if value is Color:
 			painted.append({"node": node, "property": property, "light": value})
@@ -73,10 +75,12 @@ func sync_theme() -> void:
 	dark = wanted
 	applied = true
 	RenderingServer.set_default_clear_color(themed(light_background))
-	for entry: Dictionary in painted:
-		var node: Node = entry["node"]
-		if is_instance_valid(node):
-			node.set(entry["property"], themed(entry["light"]))
+	for index: int in range(painted.size() - 1, -1, -1):
+		var node: Variant = painted[index]["node"]
+		if not is_instance_valid(node):
+			painted.remove_at(index)
+			continue
+		(node as Node).set(painted[index]["property"], themed(painted[index]["light"]))
 
 
 func themed(color: Color) -> Color:
@@ -93,3 +97,11 @@ func sync_debug() -> void:
 	debug_view = wanted
 	Engine.set_meta("debug_view", debug_view)
 	get_tree().call_group("debug_view", "set_debug_view", debug_view)
+
+
+func _on_node_added(node: Node) -> void:
+	for property: String in PAINTED:
+		var value: Variant = node.get(property)
+		if value is Color:
+			painted.append({"node": node, "property": property, "light": value})
+			node.set(property, themed(value))

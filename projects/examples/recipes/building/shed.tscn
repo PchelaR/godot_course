@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="Shape_shed"]
+size = Vector2(64, 48)
+
+[node name="Shed" type="StaticBody2D"]
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_shed")
+
+[node name="Look" type="Polygon2D" parent="."]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-32.0, -24.0, 32.0, -24.0, 32.0, 24.0, -32.0, 24.0)
+
+[node name="Door" type="Polygon2D" parent="."]
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(-6, 8, 6, 8, 6, 24, -6, 24)

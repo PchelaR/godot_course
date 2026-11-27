@@ -162,11 +162,13 @@ DIRECTIONS = {"move_left": "left", "move_right": "right", "move_up": "up", "move
 BUTTONS = {
     "interact": "Сесть",
     "shoot": "Огонь",
+    "attack": "Удар",
     "jump": "Прыжок",
     "handbrake": "Ручник",
     "ui_accept": "Действие",
     "dash": "Рывок",
     "pause": "Пауза",
+    "rotate": "Поворот",
 }
 SPACE_ACTIONS = ("jump", "handbrake", "ui_accept")
 ACTION_PATTERN = re.compile(r'"(' + "|".join([*DIRECTIONS, *BUTTONS]) + r')"')

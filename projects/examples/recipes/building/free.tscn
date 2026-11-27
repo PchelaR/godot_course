@@ -1,0 +1,137 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://recipes/building/free_builder.gd" id="builder"]
+[ext_resource type="PackedScene" path="res://recipes/building/shed.tscn" id="shed"]
+
+[sub_resource type="CircleShape2D" id="Shape_tree"]
+radius = 22.0
+
+[sub_resource type="RectangleShape2D" id="Shape_probe"]
+size = Vector2(64, 48)
+
+[node name="Recipe" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Border" type="Line2D" parent="."]
+points = PackedVector2Array(24, 24, 1128, 24, 1128, 624, 24, 624)
+closed = true
+width = 2.0
+default_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree1" type="StaticBody2D" parent="Trees"]
+position = Vector2(200, 160)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree1"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree1"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree2" type="StaticBody2D" parent="Trees"]
+position = Vector2(330, 420)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree2"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree2"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree3" type="StaticBody2D" parent="Trees"]
+position = Vector2(520, 250)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree3"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree3"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree4" type="StaticBody2D" parent="Trees"]
+position = Vector2(700, 500)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree4"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree4"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree5" type="StaticBody2D" parent="Trees"]
+position = Vector2(860, 180)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree5"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree5"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree6" type="StaticBody2D" parent="Trees"]
+position = Vector2(980, 400)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree6"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree6"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree7" type="StaticBody2D" parent="Trees"]
+position = Vector2(450, 560)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree7"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree7"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree8" type="StaticBody2D" parent="Trees"]
+position = Vector2(1040, 560)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree8"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree8"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree9" type="StaticBody2D" parent="Trees"]
+position = Vector2(140, 520)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree9"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree9"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Tree10" type="StaticBody2D" parent="Trees"]
+position = Vector2(760, 330)
+
+[node name="Shape" type="CollisionShape2D" parent="Trees/Tree10"]
+shape = SubResource("Shape_tree")
+
+[node name="Look" type="Polygon2D" parent="Trees/Tree10"]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(22.0, 0.0, 21.3, 5.7, 19.1, 11.0, 15.6, 15.6, 11.0, 19.1, 5.7, 21.3, 0.0, 22.0, -5.7, 21.3, -11.0, 19.1, -15.6, 15.6, -19.1, 11.0, -21.3, 5.7, -22.0, 0.0, -21.3, -5.7, -19.1, -11.0, -15.6, -15.6, -11.0, -19.1, -5.7, -21.3, -0.0, -22.0, 5.7, -21.3, 11.0, -19.1, 15.6, -15.6, 19.1, -11.0, 21.3, -5.7)
+
+[node name="Builder" type="Node2D" parent="."]
+script = ExtResource("builder")
+building_scene = ExtResource("shed")
+
+[node name="Ghost" type="Node2D" parent="Builder"]
+
+[node name="Look" type="Polygon2D" parent="Builder/Ghost"]
+color = Color(0.9098, 0.3333, 0.1843, 0.5)
+polygon = PackedVector2Array(-32.0, -24.0, 32.0, -24.0, 32.0, 24.0, -32.0, 24.0)
+
+[node name="Probe" type="ShapeCast2D" parent="Builder/Ghost"]
+shape = SubResource("Shape_probe")
+target_position = Vector2(0, 0)

@@ -1,4 +1,4 @@
-4. Рецепты
+5. Рецепты
 ==========
 
 Готовые приёмы для своих игр. Каждый рецепт — отдельная механика с демо, сценой,
@@ -10,3 +10,5 @@
    movement/index
    enemies/index
    camera/index
+   attack/index
+   building/index

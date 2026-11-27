@@ -18,7 +18,7 @@ TEMPLATES_DIR = $(HOME)/.local/share/godot/export_templates/$(GODOT_VERSION)
 endif
 GD_FILES = $(shell find projects -name '*.gd' -not -path '*/.godot/*')
 PY_PATHS = source/_ext source/conf.py tests deploy
-GAME_PROJECTS = $(patsubst %/project.godot,%,$(wildcard projects/maze/*/project.godot projects/showcase/project.godot))
+GAME_PROJECTS = $(patsubst %/project.godot,%,$(wildcard projects/maze/*/project.godot projects/defense/*/project.godot projects/showcase/project.godot))
 DEMO_SOURCES = $(shell find $(EXAMPLES) -type f -not -path '*/.godot/*' -not -name '*.out')
 TEMPLATES_URL = https://github.com/godotengine/godot-builds/releases/download/$(GODOT_RELEASE)/Godot_v$(GODOT_RELEASE)_export_templates.tpz
 

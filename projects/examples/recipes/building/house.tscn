@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[node name="House" type="Node2D"]
+
+[node name="Look" type="Polygon2D" parent="."]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-20.0, -20.0, 20.0, -20.0, 20.0, 20.0, -20.0, 20.0)
+
+[node name="Door" type="Polygon2D" parent="."]
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(-5, 6, 5, 6, 5, 20, -5, 20)

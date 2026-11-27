@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://recipes/movement/platform_arena.tscn" id="arena"]
+[ext_resource type="Script" path="res://recipes/movement/platformer.gd" id="player"]
+[ext_resource type="PackedScene" path="res://recipes/attack/target.tscn" id="target"]
+[ext_resource type="PackedScene" path="res://recipes/attack/bullet.tscn" id="bullet"]
+[ext_resource type="Script" path="res://recipes/attack/facing_gun.gd" id="gun"]
+
+[sub_resource type="RectangleShape2D" id="Shape_player"]
+size = Vector2(32, 48)
+
+[node name="Recipe" type="Node2D"]
+
+[node name="PlatformArena" parent="." instance=ExtResource("arena")]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(560, 560)
+script = ExtResource("player")
+
+[node name="Shape" type="CollisionShape2D" parent="Player"]
+shape = SubResource("Shape_player")
+
+[node name="Look" type="Polygon2D" parent="Player"]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-16.0, -24.0, 16.0, -24.0, 16.0, 24.0, -16.0, 24.0)
+
+[node name="Gun" type="Node2D" parent="Player"]
+position = Vector2(0, -4)
+script = ExtResource("gun")
+bullet_scene = ExtResource("bullet")
+
+[node name="Barrel" type="Polygon2D" parent="Player/Gun"]
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(10, -4, 30, -4, 30, 4, 10, 4)
+
+[node name="Muzzle" type="Marker2D" parent="Player/Gun"]
+position = Vector2(34, 0)
+
+[node name="Target1" parent="." instance=ExtResource("target")]
+position = Vector2(120, 578)
+
+[node name="Target2" parent="." instance=ExtResource("target")]
+position = Vector2(1000, 578)
+
+[node name="Target3" parent="." instance=ExtResource("target")]
+position = Vector2(820, 266)
+
+[node name="Target4" parent="." instance=ExtResource("target")]
+position = Vector2(300, 466)

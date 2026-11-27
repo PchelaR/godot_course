@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://recipes/building/build_tiles.png" id="1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiles"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+2:0/0 = 0
+
+[resource]
+tile_size = Vector2i(48, 48)
+custom_data_layer_0/name = "buildable"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_tiles")
