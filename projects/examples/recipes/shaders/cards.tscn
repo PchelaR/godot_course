@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://recipes/shaders/card.tscn" id="1"]
+
+[node name="Recipe" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Card1" parent="." instance=ExtResource("1")]
+position = Vector2(396, 340)
+
+[node name="Card2" parent="." instance=ExtResource("1")]
+position = Vector2(576, 340)
+
+[node name="Card3" parent="." instance=ExtResource("1")]
+position = Vector2(756, 340)

@@ -12,3 +12,4 @@
    camera/index
    attack/index
    building/index
+   shaders/index

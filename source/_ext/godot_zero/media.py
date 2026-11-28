@@ -165,6 +165,7 @@ BUTTONS = {
     "attack": "Удар",
     "jump": "Прыжок",
     "handbrake": "Ручник",
+    "accelerate": "Газ",
     "ui_accept": "Действие",
     "dash": "Рывок",
     "pause": "Пауза",
@@ -282,19 +283,24 @@ class GodotDemoDirective(SphinxDirective):
 def pad_html(self, actions: list[str]) -> str:
     directions = " ".join(DIRECTIONS[action] for action in actions if action in DIRECTIONS)
     buttons = "".join(
-        f'<button class="godot-demo-key" type="button" tabindex="-1" data-action="{action}">'
-        f"{self.encode(BUTTONS[action])}</button>"
+        f'<button class="godot-demo-key" type="button" tabindex="-1" data-action="{action}" '
+        f'aria-label="{self.encode(BUTTONS[action])}" title="{self.encode(BUTTONS[action])}">'
+        f'<span class="godot-demo-key-face">{self.encode(BUTTONS[action][0])}</span></button>'
         for action in actions
         if action in BUTTONS
     )
     if not directions and not buttons:
         return ""
-    stick = (
-        f'<div class="godot-demo-stick" data-directions="{directions}"><span class="godot-demo-knob"></span></div>'
+    arms = "".join(
+        f'<span class="godot-demo-arm godot-demo-arm-{direction}"></span>' for direction in directions.split()
+    )
+    dpad = (
+        f'<div class="godot-demo-dpad" data-directions="{directions}" data-pressed="">'
+        f'<span class="godot-demo-cross">{arms}</span></div>'
         if directions
         else "<span></span>"
     )
-    return f'<div class="godot-demo-pad" hidden>{stick}<div class="godot-demo-keys">{buttons}</div></div>'
+    return f'<div class="godot-demo-pad" hidden>{dpad}<div class="godot-demo-keys">{buttons}</div></div>'
 
 
 def visit_godot_demo_html(self, node: godot_demo) -> None:

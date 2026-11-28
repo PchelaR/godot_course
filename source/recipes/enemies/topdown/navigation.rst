@@ -89,3 +89,9 @@
    Алгоритм, которым обычно ищут кратчайший путь в играх, — A* («А-звёздочка») —
    придумали в 1968 году в Стэнфордском исследовательском институте для робота
    Shakey: ему нужно было прокладывать маршрут по комнатам между препятствиями.
+
+.. docs::
+
+   - :manual:`Навигация в 2D <tutorials/navigation/navigation_introduction_2d>`
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Использование Area2D <tutorials/physics/using_area_2d>`

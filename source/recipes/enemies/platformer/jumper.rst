@@ -57,3 +57,7 @@
 - ``jump_speed`` — высота прыжка, ``hop_speed`` — длина.
 - ``wait_time`` — пауза между прыжками.
 - ``notice_distance`` — с какого расстояния враг замечает игрока.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`

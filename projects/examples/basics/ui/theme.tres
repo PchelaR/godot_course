@@ -1,0 +1,59 @@
+[gd_resource type="Theme" load_steps=7 format=3]
+
+[sub_resource type="StyleBoxFlat" id="Normal"]
+bg_color = Color(0.9922, 0.9569, 0.8902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[sub_resource type="StyleBoxFlat" id="Hover"]
+bg_color = Color(0.9569, 0.8941, 0.7882, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[sub_resource type="StyleBoxFlat" id="Disabled"]
+bg_color = Color(0.9922, 0.9569, 0.8902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.4902, 0.4157, 0.3529, 1)
+
+[sub_resource type="StyleBoxFlat" id="Bar"]
+bg_color = Color(0.9922, 0.9569, 0.8902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[sub_resource type="StyleBoxFlat" id="Fill"]
+bg_color = Color(0.9098, 0.3333, 0.1843, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1686, 0.1294, 0.1098, 1)
+
+[sub_resource type="StyleBoxEmpty" id="Focus"]
+
+[resource]
+default_font_size = 20
+Button/colors/font_color = Color(0.1686, 0.1294, 0.1098, 1)
+Button/colors/font_hover_color = Color(0.1686, 0.1294, 0.1098, 1)
+Button/colors/font_pressed_color = Color(0.1686, 0.1294, 0.1098, 1)
+Button/colors/font_disabled_color = Color(0.4902, 0.4157, 0.3529, 1)
+Button/styles/disabled = SubResource("Disabled")
+Button/styles/focus = SubResource("Focus")
+Button/styles/hover = SubResource("Hover")
+Button/styles/normal = SubResource("Normal")
+Button/styles/pressed = SubResource("Hover")
+Label/colors/font_color = Color(0.1686, 0.1294, 0.1098, 1)
+ProgressBar/colors/font_color = Color(0.1686, 0.1294, 0.1098, 1)
+ProgressBar/styles/background = SubResource("Bar")
+ProgressBar/styles/fill = SubResource("Fill")

@@ -11,9 +11,6 @@ var road: Path2D = null
 var rally: Vector2 = Vector2.ZERO
 var soldiers: Array[Soldier] = []
 
-@onready var radius: float = ($Range/Shape.shape as CircleShape2D).radius
-@onready var ring: Line2D = $Ring
-
 
 func _ready() -> void:
 	road = get_tree().get_first_node_in_group("road")
@@ -37,11 +34,7 @@ func move_rally(point: Vector2) -> void:
 		return
 	rally = target
 	for index: int in soldiers.size():
-		soldiers[index].home = rally + SPOTS[index]
-
-
-func show_range(shown: bool) -> void:
-	ring.visible = shown
+		soldiers[index].move_home(rally + SPOTS[index])
 
 
 func apply_upgrade() -> void:

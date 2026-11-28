@@ -62,3 +62,8 @@
 
 Поворачивать можно не всё тело, а только его часть — башню танка или руку с
 оружием. Тогда ``look_at`` вызывают у этого дочернего узла, а тело не вращается.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`События ввода <tutorials/inputs/inputevent>`

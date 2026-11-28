@@ -132,3 +132,12 @@ Nearest.
 увеличиваться скачками, а не плавно, и пиксели всё время должны оставаться
 одинаковыми чёткими квадратами. Если спрайт размыт, проверьте **Default Texture
 Filter**. Если пиксели разной ширины — **Scale Mode**.
+
+.. mistakes::
+
+   - **Спрайты размыты.** Фильтр **Linear** вместо **Nearest**: **Project Settings → Rendering → Textures → Default Texture Filter**.
+   - **Пиксели разной толщины.** Окно увеличено в нецелое число раз. Включите **Stretch → Scale Mode** — **integer**.
+
+.. docs::
+
+   - :manual:`Разные разрешения экрана <tutorials/rendering/multiple_resolutions>`

@@ -8,12 +8,14 @@ from sphinx.application import Sphinx
 from godot_pygments import GodotLexer
 
 from .blocks import (
+    DocsDirective,
     ExampleDiffDirective,
     ExampleDirective,
     ExerciseDirective,
     FunFactDirective,
     InGameDirective,
     LinkButtonDirective,
+    MistakesDirective,
     SolutionDirective,
     depart_solution_html,
     diff_lines,
@@ -40,7 +42,7 @@ from .media import (
 )
 from .projects import archive_name, pack_projects, resolve_projects_dir
 from .pwa import write_offline_files
-from .roles import GodotRole, GodotSignalRole, ProjectRole, godot_docs_url
+from .roles import GodotRole, GodotSignalRole, ManualRole, ProjectRole, godot_docs_url
 
 __all__ = ["archive_name", "diff_lines", "godot_docs_url", "optimize_image", "resolve_docname", "setup"]
 
@@ -71,6 +73,7 @@ def setup(app: Sphinx) -> dict:
     app.add_role("godot", GodotRole())
     app.add_role("godot-signal", GodotSignalRole())
     app.add_role("project", ProjectRole())
+    app.add_role("manual", ManualRole())
     app.add_node(
         godot_demo,
         html=(visit_godot_demo_html, None),
@@ -93,6 +96,8 @@ def setup(app: Sphinx) -> dict:
     app.add_directive("example-diff", ExampleDiffDirective)
     app.add_directive("in-game", InGameDirective)
     app.add_directive("fun-fact", FunFactDirective)
+    app.add_directive("mistakes", MistakesDirective)
+    app.add_directive("docs", DocsDirective)
     app.add_directive("exercise", ExerciseDirective)
     app.add_node(
         sprite_animation,

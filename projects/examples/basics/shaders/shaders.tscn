@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://icon.svg" id="tex"]
+[ext_resource type="Shader" path="res://basics/shaders/flash.gdshader" id="flash"]
+[ext_resource type="Shader" path="res://basics/shaders/wave.gdshader" id="wave"]
+[ext_resource type="Shader" path="res://basics/shaders/float.gdshader" id="float"]
+[ext_resource type="Script" path="res://basics/shaders/flash.gd" id="script"]
+
+[sub_resource type="ShaderMaterial" id="Material_flash"]
+shader = ExtResource("flash")
+
+[sub_resource type="ShaderMaterial" id="Material_wave"]
+shader = ExtResource("wave")
+
+[sub_resource type="ShaderMaterial" id="Material_float"]
+shader = ExtResource("float")
+
+[node name="Shaders" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Flash" type="Sprite2D" parent="."]
+material = SubResource("Material_flash")
+position = Vector2(336, 324)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("tex")
+script = ExtResource("script")
+
+[node name="Wave" type="Sprite2D" parent="."]
+material = SubResource("Material_wave")
+position = Vector2(576, 324)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("tex")
+
+[node name="Float" type="Sprite2D" parent="."]
+material = SubResource("Material_float")
+position = Vector2(816, 324)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("tex")

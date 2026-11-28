@@ -10,6 +10,8 @@ from sphinx.util.nodes import split_explicit_title
 from .projects import archive_name
 
 DOCS_URL = "https://docs.godotengine.org/en/{version}/classes/class_{page}.html"
+MANUAL_URL = "https://docs.godotengine.org/en/{version}/{page}.html"
+MANUAL_RE = re.compile(r"^[a-z0-9_-]+(/[a-z0-9_-]+)*$")
 
 
 CLASS_RE = re.compile(r"^@?[A-Z][A-Za-z0-9_]*$")
@@ -54,6 +56,18 @@ class GodotRole(SphinxRole):
 
 class GodotSignalRole(GodotRole):
     signal = True
+
+
+class ManualRole(SphinxRole):
+    def run(self):
+        _, title, target = split_explicit_title(self.text)
+        if not MANUAL_RE.match(target):
+            msg = self.inliner.reporter.error(f"invalid Godot manual page: {target!r}", line=self.lineno)
+            return [self.inliner.problematic(self.rawtext, self.rawtext, msg)], [msg]
+        url = MANUAL_URL.format(version=self.config.godot_docs_version, page=target)
+        ref = nodes.reference("", "", internal=False, refuri=url, classes=["godot-manual"])
+        ref += nodes.Text(title)
+        return [ref], []
 
 
 class ProjectRole(SphinxRole):

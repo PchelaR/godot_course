@@ -67,4 +67,13 @@
 .. godot-demo:: defense/04_enemy
    :title: Враги на дороге
 
+.. mistakes::
+
+   - **Враг ходит по кругу.** У :godot:`PathFollow2D` включён **Loop**.
+   - **Враг не двигается.** Враг добавлен не ребёнком пути: :godot:`PathFollow2D` должен лежать прямо в :godot:`Path2D`.
+
+.. docs::
+
+   - :godot:`PathFollow2D` — все свойства
+
 Готовый проект этой главы — :project:`defense/04_enemy`.

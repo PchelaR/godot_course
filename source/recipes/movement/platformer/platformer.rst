@@ -69,3 +69,8 @@
   даёт симметричную плавную дугу.
 - ``jump_cut`` — какая часть скорости вверх остаётся, когда клавишу отпустили.
   ``1`` — высота прыжка не зависит от нажатия.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Движение в 2D <tutorials/2d/2d_movement>`

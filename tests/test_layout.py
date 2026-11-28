@@ -100,6 +100,7 @@ def test_navigation_contains_chapters(page):
     assert "5.3. Камера" in links
     assert "5.4. Атака" in links
     assert "5.5. Строительство" in links
+    assert "5.6. Шейдеры" in links
     assert "Восемь направлений" in links
     assert "Глоссарий" in links
     assert "Трофеи" in links

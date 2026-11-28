@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[sub_resource type="PhysicsMaterial" id="Material_ball"]
+bounce = 0.7
+
+[sub_resource type="CircleShape2D" id="Circle_ball"]
+radius = 20.0
+
+[node name="Ball" type="RigidBody2D"]
+mass = 0.5
+physics_material_override = SubResource("Material_ball")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("Circle_ball")
+
+[node name="Look" type="Polygon2D" parent="."]
+color = Color(0.7843, 0.651, 0.8627, 1)
+polygon = PackedVector2Array(20.0, 0.0, 19.3, 5.2, 17.3, 10.0, 14.1, 14.1, 10.0, 17.3, 5.2, 19.3, 0.0, 20.0, -5.2, 19.3, -10.0, 17.3, -14.1, 14.1, -17.3, 10.0, -19.3, 5.2, -20.0, 0.0, -19.3, -5.2, -17.3, -10.0, -14.1, -14.1, -10.0, -17.3, -5.2, -19.3, -0.0, -20.0, 5.2, -19.3, 10.0, -17.3, 14.1, -14.1, 17.3, -10.0, 19.3, -5.2)

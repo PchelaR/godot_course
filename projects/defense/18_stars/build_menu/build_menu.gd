@@ -13,6 +13,10 @@ func _ready() -> void:
 func open(at: Vector2, money: int) -> void:
 	position = at
 	visible = true
+	refresh(money)
+
+
+func refresh(money: int) -> void:
 	for button: TowerButton in get_children():
 		button.update(money)
 

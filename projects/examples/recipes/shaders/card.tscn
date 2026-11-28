@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://recipes/shaders/card.gd" id="1"]
+[ext_resource type="Shader" path="res://recipes/shaders/card.gdshader" id="2"]
+[ext_resource type="Texture2D" path="res://recipes/shaders/card.png" id="3"]
+
+[sub_resource type="ShaderMaterial" id="Material_card"]
+resource_local_to_scene = true
+shader = ExtResource("2")
+shader_parameter/fov = 90.0
+shader_parameter/x_rot = 0.0
+shader_parameter/y_rot = 0.0
+
+[node name="Card" type="Sprite2D"]
+material = SubResource("Material_card")
+texture = ExtResource("3")
+script = ExtResource("1")

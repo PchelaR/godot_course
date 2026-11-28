@@ -13,3 +13,14 @@
    export
    signals
    instancing
+   debugging
+   character_body
+   rigid_body
+   area
+   tilemap
+   animation
+   shaders
+   audio
+   ui
+   scenes
+   saving

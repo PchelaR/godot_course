@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[sub_resource type="RectangleShape2D" id="Rect_box"]
+size = Vector2(40, 40)
+
+[node name="Box" type="RigidBody2D"]
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("Rect_box")
+
+[node name="Look" type="Polygon2D" parent="."]
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-20.0, -20.0, 20.0, -20.0, 20.0, 20.0, -20.0, 20.0)

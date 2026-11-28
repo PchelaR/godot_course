@@ -69,3 +69,9 @@ Age of Empires и в tower defense со свободной расстановк�
 Почему не :godot:`Area2D`? Область сообщает о пересечениях сигналами и только
 после кадра физики. Призрак мчится за курсором, и область каждый раз отвечала
 бы с опозданием. ``ShapeCast2D`` с ``force_shapecast_update()`` отвечает сразу.
+
+.. docs::
+
+   - :godot:`ShapeCast2D` — все свойства и методы
+   - :manual:`Карты из тайлов <tutorials/2d/using_tilemaps>`
+   - :godot:`TileMapLayer` — все методы

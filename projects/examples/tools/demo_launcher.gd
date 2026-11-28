@@ -64,8 +64,22 @@ func collect_colors(node: Node) -> void:
 		var value: Variant = node.get(property)
 		if value is Color:
 			painted.append({"node": node, "property": property, "light": value})
+	if node is Control and (node as Control).theme:
+		collect_theme((node as Control).theme)
 	for child: Node in node.get_children():
 		collect_colors(child)
+
+
+func collect_theme(theme: Theme) -> void:
+	for type: String in theme.get_type_list():
+		for color_name: String in theme.get_color_list(type):
+			var path: String = "%s/colors/%s" % [type, color_name]
+			painted.append({"node": theme, "property": path, "light": theme.get(path)})
+		for style_name: String in theme.get_stylebox_list(type):
+			var style: StyleBox = theme.get_stylebox(style_name, type)
+			if style is StyleBoxFlat:
+				for property: String in ["bg_color", "border_color"]:
+					painted.append({"node": style, "property": property, "light": style.get(property)})
 
 
 func sync_theme() -> void:
@@ -80,7 +94,7 @@ func sync_theme() -> void:
 		if not is_instance_valid(node):
 			painted.remove_at(index)
 			continue
-		(node as Node).set(painted[index]["property"], themed(painted[index]["light"]))
+		(node as Object).set(painted[index]["property"], themed(painted[index]["light"]))
 
 
 func themed(color: Color) -> Color:

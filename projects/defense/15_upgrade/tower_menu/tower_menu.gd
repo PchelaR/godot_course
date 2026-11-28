@@ -4,6 +4,8 @@ extends Node2D
 signal upgrade_pressed
 signal sell_pressed
 
+var tower: Tower = null
+
 @onready var upgrade_button: Button = $Upgrade
 @onready var upgrade_price: Label = $Upgrade/Price
 @onready var sell_price: Label = $Sell/Price
@@ -13,9 +15,17 @@ func _ready() -> void:
 	close()
 
 
-func open(tower: Tower, money: int) -> void:
+func open(selected: Tower, money: int) -> void:
+	tower = selected
 	position = tower.global_position
 	visible = true
+	tower.show_range(true)
+	refresh(money)
+
+
+func refresh(money: int) -> void:
+	if not visible or not is_instance_valid(tower):
+		return
 	upgrade_button.visible = tower.can_upgrade()
 	upgrade_button.disabled = tower.data.upgrade_cost > money
 	upgrade_button.modulate.a = 0.5 if upgrade_button.disabled else 1.0
@@ -24,6 +34,8 @@ func open(tower: Tower, money: int) -> void:
 
 
 func close() -> void:
+	if is_instance_valid(tower):
+		tower.show_range(false)
 	visible = false
 
 

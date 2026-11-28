@@ -69,3 +69,8 @@
   длина рывка: ``1100 × 0.14 ≈ 150`` пикселей.
 - ``dash_cooldown`` — пауза между рывками.
 - Остальные параметры — бег и прыжок.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Движение в 2D <tutorials/2d/2d_movement>`

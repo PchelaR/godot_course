@@ -3,10 +3,14 @@ extends Node2D
 
 const SELL_SHARE: float = 0.6
 
+@export var range_color: Color = Color(0.1686, 0.1294, 0.1098, 0.6)
+
 var data: TowerData = null
 var level: int = 1
+var showing_range: bool = false
 
 @onready var range_area: Area2D = $Range
+@onready var radius: float = ($Range/Shape.shape as CircleShape2D).radius
 @onready var mark: Node2D = $Mark
 
 
@@ -46,3 +50,13 @@ func sell_price() -> int:
 	if level == 2:
 		spent += data.upgrade_cost
 	return int(spent * SELL_SHARE)
+
+
+func show_range(shown: bool) -> void:
+	showing_range = shown
+	queue_redraw()
+
+
+func _draw() -> void:
+	if showing_range:
+		draw_arc(Vector2.ZERO, radius, 0.0, TAU, 64, range_color, 3.0)

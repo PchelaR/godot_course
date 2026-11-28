@@ -62,3 +62,8 @@
 ``PathFollow2D`` не замечает стен: маршрут сам должен их обходить. А чтобы охранник
 отвлекался на игрока, ему понадобится зона обнаружения — и тогда выгоднее сделать
 его :godot:`CharacterBody2D` и двигать к точкам маршрута самостоятельно.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Использование Area2D <tutorials/physics/using_area_2d>`

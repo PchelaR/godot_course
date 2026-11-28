@@ -886,6 +886,7 @@ document.addEventListener("DOMContentLoaded", () => {
     shoot: { code: "KeyF", key: "f" },
     attack: { code: "KeyF", key: "f" },
     pause: { code: "KeyP", key: "p" },
+    accelerate: { code: "KeyG", key: "g" },
     rotate: { code: "KeyR", key: "r" },
   };
 
@@ -934,26 +935,18 @@ document.addEventListener("DOMContentLoaded", () => {
       sync();
     };
 
-    const stick = pad.querySelector(".godot-demo-stick");
-    if (stick) {
-      const knob = stick.querySelector(".godot-demo-knob");
-      const directions = new Set(stick.dataset.directions.split(" "));
+    const dpad = pad.querySelector(".godot-demo-dpad");
+    if (dpad) {
+      const directions = new Set(dpad.dataset.directions.split(" "));
+      const vertical = directions.has("up") || directions.has("down");
       const steer = (event) => {
-        const rect = stick.getBoundingClientRect();
-        const radius = rect.width / 2;
-        const vertical = directions.has("up") || directions.has("down");
-        let x = (event.clientX - rect.left - radius) / radius;
-        let y = vertical ? (event.clientY - rect.top - rect.height / 2) / radius : 0;
-        const length = Math.hypot(x, y);
-        if (length > 1) {
-          x /= length;
-          y /= length;
-        }
-        knob.style.transform = `translate(${x * radius * 0.6}px, ${y * radius * 0.6}px)`;
-        const edge = vertical ? 0.38 : 0;
+        const rect = dpad.getBoundingClientRect();
+        const x = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+        const y = vertical ? (event.clientY - rect.top - rect.height / 2) / (rect.height / 2) : 0;
         sources.stick.clear();
-        if (Math.hypot(x, y) > 0.25) {
-          const unit = Math.hypot(x, y);
+        const unit = Math.hypot(x, y);
+        if (unit > 0.2) {
+          const edge = vertical ? 0.38 : 0;
           const want = {
             left: x / unit < -edge,
             right: x / unit > edge,
@@ -966,29 +959,26 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           }
         }
+        dpad.dataset.pressed = [...sources.stick].map((action) => action.slice(5)).join(" ");
         sync();
       };
       const stop = () => {
-        knob.style.transform = "";
         sources.stick.clear();
+        dpad.dataset.pressed = "";
         sync();
       };
-      stick.addEventListener("pointerdown", (event) => {
+      dpad.addEventListener("pointerdown", (event) => {
         event.preventDefault();
-        stick.setPointerCapture(event.pointerId);
-        stick.classList.add("godot-demo-active");
+        dpad.setPointerCapture(event.pointerId);
         steer(event);
       });
-      stick.addEventListener("pointermove", (event) => {
-        if (stick.hasPointerCapture(event.pointerId)) {
+      dpad.addEventListener("pointermove", (event) => {
+        if (dpad.hasPointerCapture(event.pointerId)) {
           steer(event);
         }
       });
       for (const type of ["pointerup", "pointercancel", "lostpointercapture"]) {
-        stick.addEventListener(type, () => {
-          stick.classList.remove("godot-demo-active");
-          stop();
-        });
+        dpad.addEventListener(type, stop);
       }
     }
 

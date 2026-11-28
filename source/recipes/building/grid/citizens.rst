@@ -68,3 +68,9 @@ Pharaoh и Caesar носильщики ходят по улицам, а в tower
 Сетка собирается один раз в ``_ready()``. Если игрок строит дороги во время
 игры, меняйте ``set_point_solid()`` для изменённой клетки — пересобирать всё не
 нужно.
+
+.. docs::
+
+   - :godot:`AStarGrid2D` — все методы
+   - :manual:`Карты из тайлов <tutorials/2d/using_tilemaps>`
+   - :godot:`TileMapLayer` — все методы

@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://basics/animation/tween.gd" id="1"]
+
+[node name="Tween" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Floor" type="Polygon2D" parent="."]
+color = Color(0.4902, 0.4157, 0.3529, 1)
+polygon = PackedVector2Array(376, 440, 776, 440, 776, 456, 376, 456)
+
+[node name="Box" type="Polygon2D" parent="."]
+position = Vector2(576, 410)
+color = Color(0.9098, 0.3333, 0.1843, 1)
+polygon = PackedVector2Array(-30.0, -30.0, 30.0, -30.0, 30.0, 30.0, -30.0, 30.0)
+script = ExtResource("1")

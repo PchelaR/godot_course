@@ -57,4 +57,12 @@
    :title: Казарма
    :hint: Постройте казарму рядом с дорогой.
 
+.. mistakes::
+
+   - **Казарма не находит дорогу.** Узел ``Road`` не добавлен в группу ``road``.
+
+.. docs::
+
+   - :manual:`Группы <tutorials/scripting/groups>`
+
 Готовый проект этой главы — :project:`defense/11_barracks`.

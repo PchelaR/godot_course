@@ -72,3 +72,8 @@ Windows, macOS, Linux, Android, iOS и веб-браузеров.
 - `Официальный сайт Godot <https://godotengine.org/>`_
 - `Лицензия Godot <https://godotengine.org/license/>`_
 - `Философия устройства Godot <https://docs.godotengine.org/en/4.7/getting_started/introduction/godot_design_philosophy.html>`_
+
+.. docs::
+
+   - :manual:`О Godot <about/introduction>`
+   - :manual:`Частые вопросы о Godot <about/faq>`

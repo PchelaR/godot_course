@@ -88,3 +88,8 @@
 - ``handbrake_power`` — как резко ручник гасит скорость.
 - ``handbrake_steering`` — во сколько раз руль сильнее при ручнике.
 - ``rolling_drag`` — как быстро машина останавливается накатом.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Векторная математика <tutorials/math/vector_math>`

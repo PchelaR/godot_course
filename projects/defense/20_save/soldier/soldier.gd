@@ -3,6 +3,7 @@ extends Node2D
 
 const REACH: float = 28.0
 
+@export var aggro_radius: float = 70.0
 @export var speed: float = 90.0
 @export var health: int = 12
 @export var damage: int = 1
@@ -15,6 +16,7 @@ var enemy: Enemy = null
 var health_left: int = 0
 var cooldown: float = 0.0
 var dead_time: float = 0.0
+var retreating: bool = false
 
 @onready var fill: Node2D = $HealthBar/Fill
 
@@ -28,6 +30,10 @@ func _physics_process(delta: float) -> void:
 		dead_time -= delta
 		if dead_time <= 0.0:
 			revive()
+		return
+	if retreating:
+		global_position = global_position.move_toward(home, speed * delta)
+		retreating = global_position != home
 		return
 	if not is_instance_valid(enemy):
 		enemy = find_enemy()
@@ -47,6 +53,8 @@ func _physics_process(delta: float) -> void:
 
 func find_enemy() -> Enemy:
 	for candidate: Enemy in barracks.enemies_in_range():
+		if candidate.global_position.distance_to(home) > aggro_radius:
+			continue
 		if not is_instance_valid(candidate.blocker):
 			candidate.blocker = self
 			return candidate
@@ -66,6 +74,14 @@ func die() -> void:
 	enemy = null
 	visible = false
 	dead_time = respawn_time
+
+
+func move_home(new_home: Vector2) -> void:
+	if is_instance_valid(enemy):
+		enemy.blocker = null
+	enemy = null
+	home = new_home
+	retreating = visible
 
 
 func strengthen(new_health: int, new_damage: int) -> void:

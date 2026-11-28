@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Shader" path="res://recipes/shaders/fire.gdshader" id="1"]
+
+[sub_resource type="ShaderMaterial" id="Material_fire"]
+shader = ExtResource("1")
+
+[sub_resource type="ShaderMaterial" id="Material_small"]
+shader = ExtResource("1")
+shader_parameter/speed = 2.2
+shader_parameter/pixels = 24.0
+
+[node name="Recipe" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Fire" type="ColorRect" parent="."]
+material = SubResource("Material_fire")
+offset_left = 476.0
+offset_top = 180.0
+offset_right = 676.0
+offset_bottom = 480.0
+
+[node name="Log" type="Polygon2D" parent="."]
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(466, 476, 686, 476, 686, 500, 466, 500)
+
+[node name="SmallFire" type="ColorRect" parent="."]
+material = SubResource("Material_small")
+offset_left = 236.0
+offset_top = 360.0
+offset_right = 316.0
+offset_bottom = 480.0
+
+[node name="SmallLog" type="Polygon2D" parent="."]
+color = Color(0.1686, 0.1294, 0.1098, 1)
+polygon = PackedVector2Array(226, 476, 326, 476, 326, 492, 226, 492)

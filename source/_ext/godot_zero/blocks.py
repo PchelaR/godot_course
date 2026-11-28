@@ -25,9 +25,12 @@ def display_name(path: Path) -> str:
 
 def build_example(directive: SphinxDirective, name: str) -> list[nodes.Node]:
     root = Path(directive.config.godot_projects_dir)
-    script = root / "examples" / f"{name}.gd"
+    script = root / "examples" / (name if name.endswith(".gdshader") else f"{name}.gd")
     if not script.is_file() and (root / f"{name}.gd").is_file():
         script = root / f"{name}.gd"
+    shader = root / "examples" / f"{name}.gdshader"
+    if not script.is_file() and shader.is_file():
+        script = shader
     if not script.is_file():
         logger.warning("example not found: %s", script, location=directive.get_location())
         return []
@@ -37,9 +40,11 @@ def build_example(directive: SphinxDirective, name: str) -> list[nodes.Node]:
     header = nodes.paragraph(classes=["example-header"])
     label = display_name(script)
     header += nodes.inline(label, label, classes=["example-file"])
-    header += nodes.inline("GDScript", "GDScript", classes=["example-lang"])
+    is_shader = script.suffix == ".gdshader"
+    lang = "Шейдер" if is_shader else "GDScript"
+    header += nodes.inline(lang, lang, classes=["example-lang"])
 
-    code = nodes.literal_block(source, source, language="gdscript")
+    code = nodes.literal_block(source, source, language="glsl" if is_shader else "gdscript")
     example = nodes.container(classes=["example"])
     example += header
     example += code
@@ -148,6 +153,26 @@ class InGameDirective(SphinxDirective):
     def run(self):
         block = nodes.container(classes=["in-game"])
         block += nodes.paragraph("В игре", "В игре", classes=["in-game-label"])
+        self.state.nested_parse(self.content, self.content_offset, block)
+        return [block]
+
+
+class MistakesDirective(SphinxDirective):
+    has_content = True
+
+    def run(self):
+        block = nodes.container(classes=["mistakes"])
+        block += nodes.paragraph("Частые ошибки", "Частые ошибки", classes=["mistakes-label"])
+        self.state.nested_parse(self.content, self.content_offset, block)
+        return [block]
+
+
+class DocsDirective(SphinxDirective):
+    has_content = True
+
+    def run(self):
+        block = nodes.container(classes=["docs"])
+        block += nodes.paragraph("Документация Godot", "Документация Godot", classes=["docs-label"])
         self.state.nested_parse(self.content, self.content_offset, block)
         return [block]
 

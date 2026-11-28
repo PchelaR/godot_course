@@ -78,3 +78,8 @@
 - Остальные параметры — бег и прыжок: ``speed``, ``acceleration``, ``friction``,
   ``jump_speed``, ``rise_gravity``, ``fall_gravity``, ``jump_cut``. Высота прыжка —
   ``jump_speed² / (2 · rise_gravity)``.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Движение в 2D <tutorials/2d/2d_movement>`

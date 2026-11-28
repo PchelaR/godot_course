@@ -76,3 +76,8 @@
 
 Мгновенный старт и остановку без инерции дают очень большие ``acceleration`` и
 ``friction`` — или просто ``velocity = direction * speed``.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`События ввода <tutorials/inputs/inputevent>`

@@ -70,3 +70,9 @@
 
 Конус рисуется на всю длину, даже если за стеной: он показывает, куда охранник
 смотрит, а видно ли игрока, решает луч.
+
+.. docs::
+
+   - :manual:`Лучи <tutorials/physics/ray-casting>`
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Использование Area2D <tutorials/physics/using_area_2d>`

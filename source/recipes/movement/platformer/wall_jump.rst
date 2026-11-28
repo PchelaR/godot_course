@@ -76,3 +76,8 @@
 - ``wall_push`` — сила отталкивания от стены.
 - ``wall_lock_time`` — на сколько секунд после прыжка от стены отключается
   управление по горизонтали.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Движение в 2D <tutorials/2d/2d_movement>`

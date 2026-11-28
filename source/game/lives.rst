@@ -177,4 +177,13 @@
    :title: Жизни
    :debug:
 
+.. mistakes::
+
+   - **После поимки игра продолжается, пока герой мигает.** Уровень не ждёт ``await hero.died`` перед перезапуском раунда.
+   - **Иконки жизней не выравниваются.** Иконки лежат не в контейнере :godot:`HBoxContainer`.
+
+.. docs::
+
+   - :manual:`Основы GDScript: await <tutorials/scripting/gdscript/gdscript_basics>`
+
 Готовый проект этой главы — :project:`maze/17_lives`.

@@ -92,3 +92,8 @@ Godot также поддерживает:
 
 - `Языки программирования в Godot (документация) <https://docs.godotengine.org/en/4.7/getting_started/step_by_step/scripting_languages.html>`_
 - `Справочник по GDScript (документация) <https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html>`_
+
+.. docs::
+
+   - :manual:`GDScript <tutorials/scripting/gdscript/index>`
+   - :manual:`Основы GDScript <tutorials/scripting/gdscript/gdscript_basics>`

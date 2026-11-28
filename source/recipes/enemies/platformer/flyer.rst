@@ -55,3 +55,7 @@
 
 Если ``bob_speed * distance / speed`` — целое число, враг на каждом краю
 маршрута оказывается на одной и той же высоте.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`

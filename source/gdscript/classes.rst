@@ -84,3 +84,13 @@
 класса ``Node``. Поэтому скрипт с ``extends Node`` можно прикрепить к узлу любого
 типа, а скрипт с ``extends`` конкретного типа — только к узлу этого типа или его
 наследника.
+
+.. mistakes::
+
+   - **Ошибка «Class "…" hides a global script class».** Два скрипта с одинаковым ``class_name``.
+   - **Тип из ``class_name`` не виден в другом скрипте.** Скрипт с ошибкой не сохранён или не скомпилировался. Исправьте ошибки в нём.
+
+.. docs::
+
+   - :manual:`Основы GDScript <tutorials/scripting/gdscript/gdscript_basics>`
+   - :manual:`Классы в GDScript <tutorials/scripting/gdscript/gdscript_basics>`

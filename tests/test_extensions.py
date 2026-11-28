@@ -468,8 +468,10 @@ def test_demo_touch_pad_follows_scene_actions(tmp_path):
     assert build(src, out) == 0
     pad = soup(out / "index.html").select_one("div.godot-demo div.godot-demo-pad")
     assert pad.has_attr("hidden")
-    assert pad.select_one(".godot-demo-stick")["data-directions"] == "left right"
+    assert pad.select_one(".godot-demo-dpad")["data-directions"] == "left right"
     assert [key["data-action"] for key in pad.select(".godot-demo-key")] == ["jump"]
+    assert pad.select_one(".godot-demo-key").get_text() == "П"
+    assert pad.select_one(".godot-demo-key")["aria-label"] == "Прыжок"
 
 
 def test_demo_without_keys_has_no_touch_pad(mini_site):

@@ -71,3 +71,7 @@
 ---------
 
 - ``speed`` — скорость в пикселях в секунду.
+
+.. docs::
+
+   - :manual:`Карты из тайлов <tutorials/2d/using_tilemaps>`

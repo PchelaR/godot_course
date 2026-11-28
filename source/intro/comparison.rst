@@ -137,3 +137,7 @@ Switch для разработчиков, зарегистрированных �
 
 - `Большие миры в Godot (документация) <https://docs.godotengine.org/en/4.7/tutorials/physics/large_world_coordinates.html>`_
 - `Экспорт на консоли (документация) <https://docs.godotengine.org/en/4.7/tutorials/platform/consoles.html>`_
+
+.. docs::
+
+   - :manual:`Частые вопросы о Godot <about/faq>`

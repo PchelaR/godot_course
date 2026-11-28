@@ -72,3 +72,8 @@
 - ``drop_time`` — сколько секунд платформы не замечаются после спрыгивания.
   Слишком мало — персонаж не успеет провалиться сквозь платформу.
 - ``ladders`` — список лестниц уровня.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Движение в 2D <tutorials/2d/2d_movement>`

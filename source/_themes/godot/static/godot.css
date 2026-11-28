@@ -260,6 +260,8 @@ table.docutils,
 div.admonition,
 div.in-game,
 div.fun-fact,
+div.mistakes,
+div.docs,
 div.exercise,
 .site-term-tip,
 div.game-intro,
@@ -887,6 +889,8 @@ p.example-header,
 p.game-intro-bar,
 p.fun-fact-label,
 p.in-game-label,
+p.mistakes-label,
+p.docs-label,
 p.exercise-label,
 p.admonition-title,
 p.godot-demo-bar {
@@ -1239,9 +1243,37 @@ div.in-game > :last-child {
   margin-bottom: 18px;
 }
 
-div.fun-fact {
+div.fun-fact,
+div.mistakes,
+div.docs {
   margin: 0 0 36px;
   overflow: hidden;
+}
+
+p.mistakes-label,
+p.docs-label {
+  text-transform: uppercase;
+}
+
+p.mistakes-label {
+  background-color: var(--accent);
+  color: var(--on-accent);
+}
+
+div.mistakes > :not(.mistakes-label),
+div.docs > :not(.docs-label) {
+  margin-left: 22px;
+  margin-right: 22px;
+}
+
+div.mistakes > p.mistakes-label + *,
+div.docs > p.docs-label + * {
+  margin-top: 16px;
+}
+
+div.mistakes > :last-child,
+div.docs > :last-child {
+  margin-bottom: 18px;
 }
 
 p.fun-fact-label {
@@ -1855,71 +1887,129 @@ p.godot-demo-hint {
   display: none;
 }
 
-.godot-demo-stick {
+.godot-demo-dpad {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex: none;
-  width: 128px;
-  height: 128px;
-  border: var(--border);
-  border-radius: 50%;
-  background:
-    linear-gradient(var(--line), var(--line)) center / 2px 60% no-repeat,
-    linear-gradient(var(--line), var(--line)) center / 60% 2px no-repeat,
-    var(--window);
-  box-shadow: var(--shadow-small);
+  width: 132px;
+  height: 132px;
+  filter: drop-shadow(4px 4px 0 var(--line));
   touch-action: none;
 }
 
-.godot-demo-stick[data-directions="left right"] {
-  width: 160px;
-  height: 72px;
-  border-radius: 36px;
-  background: linear-gradient(var(--line), var(--line)) center / 60% 2px no-repeat, var(--window);
+.godot-demo-dpad[data-directions="left right"] {
+  height: 44px;
 }
 
-.godot-demo-knob {
-  width: 52px;
-  height: 52px;
-  border: var(--border);
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: var(--shadow-small);
+.godot-demo-cross {
+  position: absolute;
+  inset: 0;
+  background: var(--window);
+  clip-path: polygon(44px 0, 88px 0, 88px 44px, 132px 44px, 132px 88px, 88px 88px, 88px 132px, 44px 132px, 44px 88px, 0 88px, 0 44px, 44px 44px);
+}
+
+.godot-demo-cross::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--line), var(--line)) 44px 0 / 3px 44px no-repeat,
+    linear-gradient(var(--line), var(--line)) 85px 0 / 3px 44px no-repeat,
+    linear-gradient(var(--line), var(--line)) 44px 88px / 3px 44px no-repeat,
+    linear-gradient(var(--line), var(--line)) 85px 88px / 3px 44px no-repeat,
+    linear-gradient(var(--line), var(--line)) 0 44px / 44px 3px no-repeat,
+    linear-gradient(var(--line), var(--line)) 0 85px / 44px 3px no-repeat,
+    linear-gradient(var(--line), var(--line)) 88px 44px / 44px 3px no-repeat,
+    linear-gradient(var(--line), var(--line)) 88px 85px / 44px 3px no-repeat,
+    linear-gradient(var(--line), var(--line)) 44px 0 / 44px 3px no-repeat,
+    linear-gradient(var(--line), var(--line)) 44px 129px / 44px 3px no-repeat,
+    linear-gradient(var(--line), var(--line)) 0 44px / 3px 44px no-repeat,
+    linear-gradient(var(--line), var(--line)) 129px 44px / 3px 44px no-repeat,
+    linear-gradient(var(--line), var(--line)) 62px 62px / 8px 8px no-repeat;
   pointer-events: none;
 }
 
-.godot-demo-active .godot-demo-knob {
-  box-shadow: none;
+.godot-demo-dpad[data-directions="left right"] .godot-demo-cross {
+  clip-path: none;
+  border: 3px solid var(--line);
+}
+
+.godot-demo-dpad[data-directions="left right"] .godot-demo-cross::before {
+  background: linear-gradient(var(--line), var(--line)) 59px 15px / 8px 8px no-repeat;
+}
+
+.godot-demo-arm {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  pointer-events: none;
+}
+
+.godot-demo-arm-up { left: 47px; top: 3px; }
+.godot-demo-arm-down { left: 47px; bottom: 3px; }
+.godot-demo-arm-left { left: 3px; top: 47px; }
+.godot-demo-arm-right { right: 3px; top: 47px; }
+
+.godot-demo-dpad[data-directions="left right"] .godot-demo-arm-left,
+.godot-demo-dpad[data-directions="left right"] .godot-demo-arm-right {
+  top: 0;
+}
+
+.godot-demo-dpad[data-pressed~="up"] .godot-demo-arm-up,
+.godot-demo-dpad[data-pressed~="down"] .godot-demo-arm-down,
+.godot-demo-dpad[data-pressed~="left"] .godot-demo-arm-left,
+.godot-demo-dpad[data-pressed~="right"] .godot-demo-arm-right {
+  background: var(--accent);
 }
 
 .godot-demo-keys {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, 64px);
+  gap: 16px 20px;
+  justify-content: end;
 }
 
 .godot-demo-key {
-  min-width: 84px;
-  height: 72px;
-  padding: 0 12px;
-  border: var(--border);
-  border-radius: 36px;
-  background: var(--accent-2);
-  box-shadow: var(--shadow);
-  color: var(--on-accent);
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 0;
+  background: none;
+  filter: drop-shadow(4px 4px 0 var(--line));
   touch-action: none;
 }
 
+.godot-demo-key:nth-child(odd):last-child {
+  grid-column: 2;
+}
+
+.godot-demo-key-face {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--line);
+  clip-path: polygon(25% 0, 75% 0, 75% 12.5%, 87.5% 12.5%, 87.5% 25%, 100% 25%, 100% 75%, 87.5% 75%, 87.5% 87.5%, 75% 87.5%, 75% 100%, 25% 100%, 25% 87.5%, 12.5% 87.5%, 12.5% 75%, 0 75%, 0 25%, 12.5% 25%, 12.5% 12.5%, 25% 12.5%);
+  color: var(--on-accent);
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.godot-demo-key-face::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  z-index: -1;
+  background: var(--accent-2);
+  clip-path: polygon(25% 0, 75% 0, 75% 12.5%, 87.5% 12.5%, 87.5% 25%, 100% 25%, 100% 75%, 87.5% 75%, 87.5% 87.5%, 75% 87.5%, 75% 100%, 25% 100%, 25% 87.5%, 12.5% 87.5%, 12.5% 75%, 0 75%, 0 25%, 12.5% 25%, 12.5% 12.5%, 25% 12.5%);
+}
+
 .godot-demo-key.godot-demo-active {
-  box-shadow: none;
+  filter: none;
   transform: translate(4px, 4px);
 }
 
@@ -2316,7 +2406,13 @@ html.site-crt body::before {
   mask-image: url("icons/gamepad.svg");
 }
 
+.site[data-page="index"] .sd-row > :nth-child(4) .sd-card-title::after,
 .site[data-page="index"] .sd-row > :nth-child(5) .sd-card-title::after {
+  -webkit-mask-image: url("icons/gamepad.svg");
+  mask-image: url("icons/gamepad.svg");
+}
+
+.site[data-page="index"] .sd-row > :nth-child(6) .sd-card-title::after {
   -webkit-mask-image: url("icons/notes.svg");
   mask-image: url("icons/notes.svg");
 }

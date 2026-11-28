@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Shader" path="res://recipes/shaders/dissolve.gdshader" id="1"]
+[ext_resource type="Script" path="res://recipes/shaders/dissolve.gd" id="2"]
+
+[sub_resource type="ShaderMaterial" id="Material_1"]
+shader = ExtResource("1")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="Material_2"]
+shader = ExtResource("1")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="Material_3"]
+shader = ExtResource("1")
+shader_parameter/progress = 0.0
+
+[node name="Recipe" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Square1" type="ColorRect" parent="."]
+material = SubResource("Material_1")
+offset_left = 256.0
+offset_top = 244.0
+offset_right = 416.0
+offset_bottom = 404.0
+color = Color(0.7843, 0.651, 0.8627, 1)
+script = ExtResource("2")
+
+[node name="Square2" type="ColorRect" parent="."]
+material = SubResource("Material_2")
+offset_left = 496.0
+offset_top = 244.0
+offset_right = 656.0
+offset_bottom = 404.0
+color = Color(0.9098, 0.3333, 0.1843, 1)
+script = ExtResource("2")
+
+[node name="Square3" type="ColorRect" parent="."]
+material = SubResource("Material_3")
+offset_left = 736.0
+offset_top = 244.0
+offset_right = 896.0
+offset_bottom = 404.0
+color = Color(0.4902, 0.4157, 0.3529, 1)
+script = ExtResource("2")

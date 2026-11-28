@@ -50,8 +50,7 @@ func _on_build_menu_picked(data: TowerData) -> void:
 	build_menu.close()
 	if data.cost > money:
 		return
-	money -= data.cost
-	hud.show_money(money)
+	change_money(-data.cost)
 	var tower: Tower = data.scene.instantiate()
 	tower.data = data
 	tower.position = selected.global_position
@@ -64,8 +63,7 @@ func _on_tower_menu_upgrade_pressed() -> void:
 	var tower: Tower = selected.tower
 	if not tower.can_upgrade() or tower.data.upgrade_cost > money:
 		return
-	money -= tower.data.upgrade_cost
-	hud.show_money(money)
+	change_money(-tower.data.upgrade_cost)
 	tower.upgrade()
 
 
@@ -78,10 +76,16 @@ func _on_tower_menu_rally_pressed() -> void:
 func _on_tower_menu_sell_pressed() -> void:
 	tower_menu.close()
 	var tower: Tower = selected.tower
-	money += tower.sell_price()
-	hud.show_money(money)
+	change_money(tower.sell_price())
 	tower.queue_free()
 	selected.tower = null
+
+
+func change_money(amount: int) -> void:
+	money += amount
+	hud.show_money(money)
+	build_menu.refresh(money)
+	tower_menu.refresh(money)
 
 
 func _on_waves_wave_started(number: int) -> void:
@@ -94,8 +98,7 @@ func _on_waves_break_started() -> void:
 
 
 func _on_hud_call_pressed() -> void:
-	money += waves.call_early()
-	hud.show_money(money)
+	change_money(waves.call_early())
 
 
 func _on_waves_enemy_spawned(enemy: Enemy) -> void:
@@ -104,8 +107,7 @@ func _on_waves_enemy_spawned(enemy: Enemy) -> void:
 
 
 func _on_enemy_died(reward: int) -> void:
-	money += reward
-	hud.show_money(money)
+	change_money(reward)
 
 
 func _on_enemy_escaped() -> void:

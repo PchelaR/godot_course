@@ -3,6 +3,7 @@ extends Node2D
 
 const REACH: float = 28.0
 
+@export var aggro_radius: float = 70.0
 @export var speed: float = 90.0
 @export var health: int = 12
 @export var damage: int = 1
@@ -47,6 +48,8 @@ func _physics_process(delta: float) -> void:
 
 func find_enemy() -> Enemy:
 	for candidate: Enemy in barracks.enemies_in_range():
+		if candidate.global_position.distance_to(home) > aggro_radius:
+			continue
 		if not is_instance_valid(candidate.blocker):
 			candidate.blocker = self
 			return candidate

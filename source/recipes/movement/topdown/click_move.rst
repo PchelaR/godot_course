@@ -58,3 +58,9 @@
 
 Персонаж идёт по прямой. Если на пути стена, он упрётся и будет скользить вдоль
 неё, а щелчок за препятствие не обойдёт: для этого нужен поиск пути.
+
+.. docs::
+
+   - :manual:`Мышь и координаты <tutorials/inputs/mouse_and_input_coordinates>`
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`События ввода <tutorials/inputs/inputevent>`

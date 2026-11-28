@@ -63,3 +63,8 @@
 Персонаж трогается и останавливается мгновенно. Для тяжёлой техники это выглядит
 игрушечно; плавный разгон даёт ``velocity = velocity.move_toward(цель, разгон *
 delta)`` вместо прямого присваивания.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Векторная математика <tutorials/math/vector_math>`

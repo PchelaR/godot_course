@@ -120,3 +120,14 @@
   ``player_name``, ``max_speed``.
 - Имена констант записываются прописными буквами: ``MAX_HEALTH``.
 - Регистр учитывается: ``health`` и ``Health`` — разные имена.
+
+.. mistakes::
+
+   - **Ошибка «Cannot assign a value of type…».** В переменную с типом кладут значение другого типа: например, строку в ``int``.
+   - **``var x := null`` не работает.** По ``null`` нельзя вывести тип. Укажите тип явно: ``var x: Node = null``.
+   - **Константу нельзя изменить.** ``const`` задаётся один раз. Для изменяемого значения нужен ``var``.
+
+.. docs::
+
+   - :manual:`Основы GDScript <tutorials/scripting/gdscript/gdscript_basics>`
+   - :manual:`Статическая типизация <tutorials/scripting/gdscript/static_typing>`

@@ -121,4 +121,12 @@
    :title: Режимы слайма
    :debug:
 
+.. mistakes::
+
+   - **Режим не меняется.** В ``match`` нет ветки для нового значения ``enum``, или таймер режимов не запущен.
+
+.. docs::
+
+   - :manual:`Основы GDScript <tutorials/scripting/gdscript/gdscript_basics>`
+
 Готовый проект этой главы — :project:`maze/12_modes`.

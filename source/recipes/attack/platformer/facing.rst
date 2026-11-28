@@ -56,3 +56,8 @@
 
 Если герой — спрайт, а не фигура, отражать его картинку удобно тем же значением
 ``facing``: :godot:`Sprite2D.flip_h` или ``scale.x`` у узла с картинкой.
+
+.. docs::
+
+   - :manual:`Создание экземпляров <getting_started/step_by_step/instancing>`
+   - :manual:`Использование Area2D <tutorials/physics/using_area_2d>`

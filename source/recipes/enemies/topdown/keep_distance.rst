@@ -59,3 +59,8 @@
 
 Стрельбы здесь нет: это отдельная механика, её добавляют отдельным скриптом или
 узлом.
+
+.. docs::
+
+   - :manual:`Использование CharacterBody2D <tutorials/physics/using_character_body_2d>`
+   - :manual:`Использование Area2D <tutorials/physics/using_area_2d>`

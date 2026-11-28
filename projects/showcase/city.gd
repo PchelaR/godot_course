@@ -135,7 +135,9 @@ func _physics_process(delta: float) -> void:
 		elif nearby != null:
 			_enter_vehicle(nearby)
 	if driving != null:
-		driving.throttle = Input.get_axis("move_down", "move_up")
+		driving.throttle = clampf(
+			Input.get_axis("move_down", "move_up") + Input.get_action_strength("accelerate"), -1.0, 1.0
+		)
 		driving.steer = Input.get_axis("move_left", "move_right")
 		driving.handbrake = Input.is_action_pressed("handbrake")
 		hud.show_hint("WASD — РУЛЬ · ПРОБЕЛ — РУЧНИК · E — ВЫЙТИ")
